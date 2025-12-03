@@ -419,7 +419,7 @@ const RoofPlane = ({ face, globalCenter, faceIndex }: RoofPlaneProps) => {
        flatCoordinates.push(p.lng, p.lat); 
     });
 
-    const indices = Earcut(flatCoordinates, null, 2);
+    const indices = Earcut(flatCoordinates, undefined , 2);
 
     const geometry = new THREE.BufferGeometry();
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices3D.flatMap(v => [v.x, v.y, v.z]), 3));
@@ -467,7 +467,7 @@ const RoofPlane = ({ face, globalCenter, faceIndex }: RoofPlaneProps) => {
   );
 };
 
-export const Roof3DView = ({ faces, lines }: { faces: RoofFace[]; lines: RoofLine[] }) => {
+export const Roof3DView = ({ faces }: { faces: RoofFace[]; lines: RoofLine[] }) => {
   const globalCenter = useMemo(() => {
     if (!faces || faces.length === 0) return { x: 0, z: 0, y: 0 };
 

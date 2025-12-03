@@ -245,7 +245,7 @@ export const parseRoofXML = (xmlString: string): RoofData => {
     const lineIds = polygon.path.split(',').map((s: string) => s.trim());
     let orderedPointIds: string[] = [];
 
-    lineIds.forEach((lineId, index) => {
+    lineIds.forEach((lineId : any, index : any) => {
       const linePoints = linesMap.get(lineId);
       if (!linePoints) return;
 
@@ -288,7 +288,7 @@ export const parseRoofXML = (xmlString: string): RoofData => {
   (roof.LINES?.LINE || []).forEach((line: any) => {
     if (!line.path) return;
     const pIds = line.path.split(',').map((s: string) => s.trim());
-    const path = pIds.map(pid => pointsMap.get(pid)).filter((p): p is Point => p !== undefined);
+    const path = pIds.map((pid : any) => pointsMap.get(pid)).filter((p : any): p is Point => p !== undefined);
     if (path.length >= 2) {
       lines.push({ id: line.id, type: line.type || 'UNKNOWN', path });
     }
