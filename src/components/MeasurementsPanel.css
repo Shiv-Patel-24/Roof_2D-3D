@@ -1,0 +1,125 @@
+.measurements-panel {
+  width: 350px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #e0e0e0;
+}
+
+.panel-header {
+  padding: 20px;
+  border-bottom: 2px solid #4CAF50;
+}
+
+.panel-header h3 {
+  font-size: 20px;
+  color: #333;
+}
+
+.panel-tabs {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tab {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  background: #f5f5f5;
+}
+
+.tab.active {
+  background: #4CAF50;
+  color: white;
+}
+
+.panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.data-table thead {
+  background: #f8f9fa;
+  position: sticky;
+  top: 0;
+}
+
+.data-table th {
+  padding: 10px;
+  text-align: left;
+  font-weight: 600;
+  color: #555;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.data-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.data-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.face-designator {
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+.line-type {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.line-type.ridge { background: purple; color: white; }
+.line-type.valley { background: rgba(223, 13, 223, 0.659); color: #e3f2fd; }
+.line-type.eave { background: red; color: #f3e5f5; }
+.line-type.rake { background: gray; color: #e8f5e9; }
+.line-type.hip { background:  brown; color: #e8f5e9; }
+.line-type.walls { background: lightblue; color:  #e8f5e9; }
+.line-type.stepflash { background: darkblue; color:  #e8f5e9; }
+.line-type.hidden { background: rgb(99, 139, 133) ; color:  #e8f5e9; }
+
+.summary-panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.summary-card {
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.summary-label {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.summary-value {
+  font-size: 28px;
+  font-weight: bold;
+}

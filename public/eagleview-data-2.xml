@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EAGLEVIEW_EXPORT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <REPORT claimId="" reportId="47737198" />
+  <VERSION coplanarity="" dormers="" precision="0" precisionUnits="" sourceVersion="1028" targetVersion="0" triangulation="" />
+  <LOCATION address="1349 Wyndmere Hills Ln" city="Matthews" lat="35.1103515" long="-80.7568125" postal="28105" state="NC" />
+  <STRUCTURES northorientation="46.3">
+    <ROOF id="ROOF1">
+      <FACES>
+        <FACE designator="AM" id="F1" material="1" type="ROOF" children="">
+          <POLYGON id="P1" orientation="313.7" path="L1,L3,L4,L5,L6,L2" pitch="10" size="932" unroundedsize="931.988246095" />
+        </FACE>
+        <FACE designator="AF" id="F2" material="1" type="ROOF" children="">
+          <POLYGON id="P2" orientation="223.7" path="L7,L8,L2" pitch="12" size="369" unroundedsize="368.708425223" />
+        </FACE>
+        <FACE designator="R" id="F3" material="1" type="ROOF" children="">
+          <POLYGON id="P3" orientation="133.7" path="L10,L9,L6,L8" pitch="10" size="87" unroundedsize="86.778407260" />
+        </FACE>
+        <FACE designator="X" id="F4" material="1" type="ROOF" children="">
+          <POLYGON id="P4" orientation="223.7" path="L12,L11,L5,L9" pitch="12" size="165" unroundedsize="164.960662172" />
+        </FACE>
+        <FACE designator="AK" id="F5" material="1" type="ROOF" children="">
+          <POLYGON id="P5" orientation="133.7" path="L14,L15,L16,L17,L18,L13,L4,L11" pitch="10" size="576" unroundedsize="575.646018429" />
+        </FACE>
+        <FACE designator="AB" id="F6" material="1" type="ROOF" children="">
+          <POLYGON id="P6" orientation="223.7" path="L20,L21,L22,L23,L19,L18" pitch="12" size="184" unroundedsize="183.958836693" />
+        </FACE>
+        <FACE designator="L" id="F7" material="1" type="ROOF" children="">
+          <POLYGON id="P7" orientation="43.7" path="L25,L26,L27,L24,L22" pitch="12" size="48" unroundedsize="48.431758274" />
+        </FACE>
+        <FACE designator="AJ" id="F8" material="1" type="ROOF" children="">
+          <POLYGON id="P8" orientation="223.7" path="L30,L31,L32,L110,L111,L109,L29,L15" pitch="12" size="487" unroundedsize="486.863177004" />
+        </FACE>
+        <FACE designator="AI" id="F9" material="1" type="ROOF" children="">
+          <POLYGON id="P9" orientation="43.7" path="L34,L35,L36,L37,L38,L33,L16,L30" pitch="12" size="467" unroundedsize="466.865584578" />
+        </FACE>
+        <FACE designator="AL" id="F10" material="1" type="ROOF" children="">
+          <POLYGON id="P10" orientation="43.7" path="L39,L41,L42,L40,L28,L20,L13,L3" pitch="12" size="645" unroundedsize="644.790431847" />
+        </FACE>
+        <FACE designator="AG" id="F11" material="1" type="ROOF" children="">
+          <POLYGON id="P11" orientation="313.7" path="L41,L43,L47,L49,L48,L45,L46,L44" pitch="10" size="352" unroundedsize="351.873917410" />
+        </FACE>
+        <FACE designator="AH" id="F12" material="1" type="ROOF" children="">
+          <POLYGON id="P12" orientation="43.7" path="L50,L51,L48" pitch="12" size="382" unroundedsize="382.166328630" />
+        </FACE>
+        <FACE designator="P" id="F13" material="1" type="ROOF" children="">
+          <POLYGON id="P13" orientation="133.7" path="L53,L52,L49,L51" pitch="10" size="52" unroundedsize="52.494792641" />
+        </FACE>
+        <FACE designator="Y" id="F14" material="1" type="ROOF" children="">
+          <POLYGON id="P14" orientation="43.7" path="L55,L47,L52,L54,L56,L57" pitch="12" size="170" unroundedsize="170.059527693" />
+        </FACE>
+        <FACE designator="Q" id="F15" material="1" type="ROOF" children="">
+          <POLYGON id="P15" orientation="133.7" path="L58,L59,L56" pitch="10" size="80" unroundedsize="80.367705791" />
+        </FACE>
+        <FACE designator="H" id="F16" material="1" type="ROOF" children="">
+          <POLYGON id="P16" orientation="223.7" path="L61,L60,L57,L59" pitch="12" size="11" unroundedsize="11.420880179" />
+        </FACE>
+        <FACE designator="AE" id="F17" material="1" type="ROOF" children="">
+          <POLYGON id="P17" orientation="133.7" path="L63,L64,L62,L42,L43,L55,L60" pitch="10" size="230" unroundedsize="229.702296927" />
+        </FACE>
+        <FACE designator="AA" id="F18" material="1" type="ROOF" children="">
+          <POLYGON id="P18" orientation="313.7" path="L65,L67,L68,L66" pitch="6" size="142" unroundedsize="141.917497832" />
+        </FACE>
+        <FACE designator="S" id="F19" material="1" type="ROOF" children="">
+          <POLYGON id="P19" orientation="223.7" path="L69,L70,L67" pitch="12" size="95" unroundedsize="95.217763806" />
+        </FACE>
+        <FACE designator="W" id="F20" material="1" type="ROOF" children="">
+          <POLYGON id="P20" orientation="133.7" path="L72,L73,L71,L68,L70" pitch="6" size="127" unroundedsize="126.696637032" />
+        </FACE>
+        <FACE designator="K" id="F21" material="1" type="ROOF" children="">
+          <POLYGON id="P21" orientation="223.7" path="L74,L76,L75,L73" pitch="4" size="22" unroundedsize="22.149039864" />
+        </FACE>
+        <FACE designator="J" id="F22" material="1" type="ROOF" children="">
+          <POLYGON id="P22" orientation="133.7" path="L76,L77,L78" pitch="4" size="22" unroundedsize="21.525547775" />
+        </FACE>
+        <FACE designator="AD" id="F23" material="1" type="ROOF" children="">
+          <POLYGON id="P23" orientation="223.7" path="L79,L81,L82,L80" pitch="5" size="152" unroundedsize="152.044720837" />
+        </FACE>
+        <FACE designator="T" id="F24" material="1" type="ROOF" children="">
+          <POLYGON id="P24" orientation="43.7" path="L83,L85,L84,L82" pitch="5" size="85" unroundedsize="84.692211800" />
+        </FACE>
+        <FACE designator="AC" id="F25" material="1" type="ROOF" children="">
+          <POLYGON id="P25" orientation="313.7" path="L86,L88,L87,L85" pitch="3" size="139" unroundedsize="138.575145679" />
+        </FACE>
+        <FACE designator="M" id="F26" material="1" type="ROOF" children="">
+          <POLYGON id="P26" orientation="223.7" path="L90,L89,L88" pitch="8" size="43" unroundedsize="42.633921772" />
+        </FACE>
+        <FACE designator="N" id="F27" material="1" type="ROOF" children="">
+          <POLYGON id="P27" orientation="43.7" path="L92,L91,L90" pitch="8" size="43" unroundedsize="42.633921772" />
+        </FACE>
+        <FACE designator="U" id="F28" material="1" type="ROOF" children="">
+          <POLYGON id="P28" orientation="313.7" path="L94,L95,L93,L91" pitch="3" size="103" unroundedsize="103.001394346" />
+        </FACE>
+        <FACE designator="O" id="F29" material="1" type="ROOF" children="">
+          <POLYGON id="P29" orientation="43.7" path="L96,L98,L97" pitch="8" size="44" unroundedsize="44.041854107" />
+        </FACE>
+        <FACE designator="V" id="F30" material="1" type="ROOF" children="">
+          <POLYGON id="P30" orientation="133.7" path="L99,L101,L100,L98" pitch="3" size="104" unroundedsize="104.137643452" />
+        </FACE>
+        <FACE designator="I" id="F31" material="1" type="ROOF" children="">
+          <POLYGON id="P31" orientation="223.7" path="L102,L105,L104,L103,L101" pitch="8" size="22" unroundedsize="21.930677474" />
+        </FACE>
+        <FACE designator="Z" id="F32" material="1" type="ROOF" children="">
+          <POLYGON id="P32" orientation="133.7" path="L106,L108,L107,L105" pitch="2" size="125" unroundedsize="125.212740265" />
+        </FACE>
+        <FACE designator="G" id="F33" material="1" type="ROOF" children="">
+          <POLYGON id="P33" orientation="133.7" path="L113,L112,L37" pitch="7" size="4" unroundedsize="3.636438221" />
+        </FACE>
+        <FACE designator="A" id="F34" material="1" type="ROOF" children="">
+          <POLYGON id="P34" orientation="133.7" path="L114,L115,L104" pitch="3" size="2" unroundedsize="1.657033361" />
+        </FACE>
+        <FACE designator="F" id="F35" material="1" type="ROOF" children="">
+          <POLYGON id="P35" orientation="133.7" path="L116,L118,L119,L117" pitch="12" size="4" unroundedsize="4.316817808" />
+        </FACE>
+        <FACE designator="B" id="F36" material="1" type="ROOF" children="">
+          <POLYGON id="P36" orientation="133.7" path="L120,L122,L123,L121" pitch="12" size="3" unroundedsize="3.225964195" />
+        </FACE>
+        <FACE designator="E" id="F37" material="1" type="ROOF" children="">
+          <POLYGON id="P37" orientation="133.7" path="L124,L126,L127,L125" pitch="12" size="4" unroundedsize="4.177748976" />
+        </FACE>
+        <FACE designator="D" id="F38" material="1" type="ROOF" children="">
+          <POLYGON id="P38" orientation="133.7" path="L128,L130,L131,L129" pitch="12" size="4" unroundedsize="4.173816822" />
+        </FACE>
+        <FACE designator="C" id="F39" material="1" type="ROOF" children="">
+          <POLYGON id="P39" orientation="133.7" path="L132,L134,L135,L133" pitch="12" size="4" unroundedsize="3.647842074" />
+        </FACE>
+      </FACES>
+      <LINES>
+        <LINE id="L1" path="C5,C6" type="EAVE" />
+        <LINE id="L2" path="C10,C5" type="HIP" />
+        <LINE id="L3" path="C6,C7" type="HIP" />
+        <LINE id="L4" path="C7,C8" type="RIDGE" />
+        <LINE id="L5" path="C8,C9" type="HIP" />
+        <LINE id="L6" path="C9,C10" type="RIDGE" />
+        <LINE id="L7" path="C5,C11" type="EAVE" />
+        <LINE id="L8" path="C11,C10" type="HIP" />
+        <LINE id="L9" path="C12,C9" type="VALLEY" />
+        <LINE id="L10" path="C11,C12" type="EAVE" />
+        <LINE id="L11" path="C13,C8" type="HIP" />
+        <LINE id="L12" path="C12,C13" type="EAVE" />
+        <LINE id="L13" path="C18,C7" type="HIP" />
+        <LINE id="L14" path="C13,C14" type="EAVE" />
+        <LINE id="L15" path="C14,C15" type="VALLEY" />
+        <LINE id="L16" path="C15,C16" type="VALLEY" />
+        <LINE id="L17" path="C16,C17" type="EAVE" />
+        <LINE id="L18" path="C17,C18" type="VALLEY" />
+        <LINE id="L19" path="C22,C17" type="EAVE" />
+        <LINE id="L20" path="C18,C19" type="RIDGE" />
+        <LINE id="L21" path="C19,C20" type="RAKE" />
+        <LINE id="L22" path="C20,C21" type="RIDGE" />
+        <LINE id="L23" path="C21,C22" type="RAKE" />
+        <LINE id="L24" path="C25,C20" type="STEPFLASH" />
+        <LINE id="L25" path="C21,C23" type="RAKE" />
+        <LINE id="L26" path="C23,C24" type="EAVE" />
+        <LINE id="L27" path="C24,C25" type="STEPFLASH" />
+        <LINE id="L28" path="C26,C19" type="RAKE" />
+        <LINE id="L29" path="C30,C14" type="FLASHING" />
+        <LINE id="L30" path="C15,C27" type="RIDGE" />
+        <LINE id="L31" path="C27,C28" type="RAKE" />
+        <LINE id="L32" path="C28,C29" type="EAVE" />
+        <LINE id="L33" path="C35,C16" type="FLASHING" />
+        <LINE id="L34" path="C27,C31" type="RAKE" />
+        <LINE id="L35" path="C31,C32" type="EAVE" />
+        <LINE id="L36" path="C32,C33" type="STEPFLASH" />
+        <LINE id="L37" path="C33,C34" type="VALLEY" />
+        <LINE id="L38" path="C34,C35" type="STEPFLASH" />
+        <LINE id="L39" path="C6,C36" type="EAVE" />
+        <LINE id="L40" path="C37,C26" type="EAVE" />
+        <LINE id="L41" path="C36,C38" type="VALLEY" />
+        <LINE id="L42" path="C38,C37" type="VALLEY" />
+        <LINE id="L43" path="C38,C39" type="RIDGE" />
+        <LINE id="L44" path="C42,C36" type="FLASHING" />
+        <LINE id="L45" path="C40,C41" type="EAVE" />
+        <LINE id="L46" path="C41,C42" type="STEPFLASH" />
+        <LINE id="L47" path="C39,C43" type="HIP" />
+        <LINE id="L48" path="C44,C40" type="HIP" />
+        <LINE id="L49" path="C43,C44" type="RIDGE" />
+        <LINE id="L50" path="C40,C45" type="EAVE" />
+        <LINE id="L51" path="C45,C44" type="HIP" />
+        <LINE id="L52" path="C46,C43" type="VALLEY" />
+        <LINE id="L53" path="C45,C46" type="EAVE" />
+        <LINE id="L54" path="C46,C47" type="EAVE" />
+        <LINE id="L55" path="C48,C39" type="HIP" />
+        <LINE id="L56" path="C47,C49" type="HIP" />
+        <LINE id="L57" path="C49,C48" type="RIDGE" />
+        <LINE id="L58" path="C47,C50" type="EAVE" />
+        <LINE id="L59" path="C50,C49" type="HIP" />
+        <LINE id="L60" path="C51,C48" type="VALLEY" />
+        <LINE id="L61" path="C50,C51" type="EAVE" />
+        <LINE id="L62" path="C53,C37" type="FLASHING" />
+        <LINE id="L63" path="C51,C52" type="EAVE" />
+        <LINE id="L64" path="C52,C53" type="STEPFLASH" />
+        <LINE id="L65" path="C54,C55" type="EAVE" />
+        <LINE id="L66" path="C57,C54" type="STEPFLASH" />
+        <LINE id="L67" path="C55,C56" type="HIP" />
+        <LINE id="L68" path="C56,C57" type="RIDGE" />
+        <LINE id="L69" path="C55,C58" type="EAVE" />
+        <LINE id="L70" path="C58,C56" type="HIP" />
+        <LINE id="L71" path="C59,C57" type="STEPFLASH" />
+        <LINE id="L72" path="C58,C60" type="EAVE" />
+        <LINE id="L73" path="C60,C59" type="VALLEY" />
+        <LINE id="L74" path="C59,C61" type="FLASHING" />
+        <LINE id="L75" path="C62,C60" type="EAVE" />
+        <LINE id="L76" path="C61,C62" type="HIP" />
+        <LINE id="L77" path="C62,C63" type="EAVE" />
+        <LINE id="L78" path="C63,C61" type="STEPFLASH" />
+        <LINE id="L79" path="C64,C65" type="EAVE" />
+        <LINE id="L80" path="C67,C64" type="STEPFLASH" />
+        <LINE id="L81" path="C65,C66" type="RAKE" />
+        <LINE id="L82" path="C66,C67" type="RIDGE" />
+        <LINE id="L83" path="C66,C68" type="RAKE" />
+        <LINE id="L84" path="C69,C67" type="STEPFLASH" />
+        <LINE id="L85" path="C68,C69" type="VALLEY" />
+        <LINE id="L86" path="C68,C70" type="EAVE" />
+        <LINE id="L87" path="C71,C69" type="FLASHING" />
+        <LINE id="L88" path="C70,C71" type="VALLEY" />
+        <LINE id="L89" path="C72,C70" type="RAKE" />
+        <LINE id="L90" path="C71,C72" type="RIDGE" />
+        <LINE id="L91" path="C73,C71" type="VALLEY" />
+        <LINE id="L92" path="C72,C73" type="RAKE" />
+        <LINE id="L93" path="C75,C71" type="FLASHING" />
+        <LINE id="L94" path="C73,C74" type="EAVE" />
+        <LINE id="L95" path="C74,C75" type="RAKE" />
+        <LINE id="L96" path="C76,C77" type="EAVE" />
+        <LINE id="L97" path="C78,C76" type="STEPFLASH" />
+        <LINE id="L98" path="C77,C78" type="HIP" />
+        <LINE id="L99" path="C77,C79" type="EAVE" />
+        <LINE id="L100" path="C80,C78" type="FLASHING" />
+        <LINE id="L101" path="C79,C80" type="HIP" />
+        <LINE id="L102" path="C79,C81" type="EAVE" />
+        <LINE id="L103" path="C82,C80" type="STEPFLASH" />
+        <LINE id="L104" path="C83,C82" type="VALLEY" />
+        <LINE id="L105" path="C81,C83" type="VALLEY" />
+        <LINE id="L106" path="C81,C84" type="EAVE" />
+        <LINE id="L107" path="C85,C83" type="FLASHING" />
+        <LINE id="L108" path="C84,C85" type="STEPFLASH" />
+        <LINE id="L109" path="C86,C30" type="STEPFLASH" />
+        <LINE id="L110" path="C29,C87" type="STEPFLASH" />
+        <LINE id="L111" path="C87,C86" type="FLASHING" />
+        <LINE id="L112" path="C88,C33" type="STEPFLASH" />
+        <LINE id="L113" path="C34,C88" type="FLASHING" />
+        <LINE id="L114" path="C82,C89" type="FLASHING" />
+        <LINE id="L115" path="C89,C83" type="STEPFLASH" />
+        <LINE id="L116" path="C31,C90" type="EAVE" />
+        <LINE id="L117" path="C92,C31" type="STEPFLASH" />
+        <LINE id="L118" path="C90,C91" type="RAKE" />
+        <LINE id="L119" path="C91,C92" type="FLASHING" />
+        <LINE id="L120" path="C28,C93" type="EAVE" />
+        <LINE id="L121" path="C95,C28" type="STEPFLASH" />
+        <LINE id="L122" path="C93,C94" type="RAKE" />
+        <LINE id="L123" path="C94,C95" type="FLASHING" />
+        <LINE id="L124" path="C23,C96" type="EAVE" />
+        <LINE id="L125" path="C98,C23" type="STEPFLASH" />
+        <LINE id="L126" path="C96,C97" type="RAKE" />
+        <LINE id="L127" path="C97,C98" type="FLASHING" />
+        <LINE id="L128" path="C22,C99" type="EAVE" />
+        <LINE id="L129" path="C101,C22" type="STEPFLASH" />
+        <LINE id="L130" path="C99,C100" type="RAKE" />
+        <LINE id="L131" path="C100,C101" type="FLASHING" />
+        <LINE id="L132" path="C26,C102" type="EAVE" />
+        <LINE id="L133" path="C104,C26" type="STEPFLASH" />
+        <LINE id="L134" path="C102,C103" type="RAKE" />
+        <LINE id="L135" path="C103,C104" type="FLASHING" />
+      </LINES>
+      <POINTS>
+        <POINT id="C5" data="60.395119670,15.892903216,0.000000000" />
+        <POINT id="C6" data="112.410104320,15.892903216,0.000000000" />
+        <POINT id="C7" data="94.676872085,-5.386975467,17.733232235" />
+        <POINT id="C8" data="81.897327738,-5.386975467,17.733232235" />
+        <POINT id="C9" data="78.903957209,-1.794930832,14.739861707" />
+        <POINT id="C10" data="75.134981376,-1.794930832,14.739861707" />
+        <POINT id="C11" data="60.395119670,-19.482764880,0.000000000" />
+        <POINT id="C12" data="64.164095503,-19.482764880,0.000000000" />
+        <POINT id="C13" data="64.164095503,-26.666854149,0.000000000" />
+        <POINT id="C14" data="73.787274987,-26.666854149,0.000000000" />
+        <POINT id="C15" data="77.407884693,-22.322122502,3.620609706" />
+        <POINT id="C16" data="81.028494398,-26.666854149,0.000000000" />
+        <POINT id="C17" data="87.154472243,-26.666854149,0.000000000" />
+        <POINT id="C18" data="99.782288281,-11.513474903,12.627816038" />
+        <POINT id="C19" data="99.782288281,-28.217937912,12.627816038" />
+        <POINT id="C20" data="95.215886159,-28.217937912,8.061413915" />
+        <POINT id="C21" data="95.215886159,-30.055667358,8.061413915" />
+        <POINT id="C22" data="87.154472243,-30.055667358,0.000000000" />
+        <POINT id="C23" data="103.277300074,-30.055667358,0.000000000" />
+        <POINT id="C24" data="103.277300074,-25.505058593,0.000000000" />
+        <POINT id="C25" data="97.013176664,-25.505058593,6.264123411" />
+        <POINT id="C26" data="112.410104320,-28.217937912,0.000000000" />
+        <POINT id="C27" data="77.407884693,-50.217815887,3.620609706" />
+        <POINT id="C28" data="64.504768932,-50.217815887,-9.282506055" />
+        <POINT id="C29" data="64.504768932,-18.014545983,-9.282506055" />
+        <POINT id="C30" data="73.787274987,-24.093514288,0.000000000" />
+        <POINT id="C31" data="90.311000454,-50.217815887,-9.282506055" />
+        <POINT id="C32" data="90.319458685,-27.317497357,-9.290964287" />
+        <POINT id="C33" data="89.539307658,-27.317497357,-8.510813260" />
+        <POINT id="C34" data="87.604917816,-24.093514288,-6.576423418" />
+        <POINT id="C35" data="81.028494398,-24.093514288,0.000000000" />
+        <POINT id="C36" data="112.410104320,1.872126387,0.000000000" />
+        <POINT id="C37" data="112.410104320,-11.435948925,0.000000000" />
+        <POINT id="C38" data="106.896281157,-4.614724394,5.513823163" />
+        <POINT id="C39" data="112.593755312,-4.614724394,5.513823163" />
+        <POINT id="C40" data="132.478507860,16.355743921,-12.311074904" />
+        <POINT id="C41" data="110.822072372,16.355743921,-12.311074904" />
+        <POINT id="C42" data="110.822072372,1.872126387,0.000000000" />
+        <POINT id="C43" data="115.293103607,-1.386092119,2.769485730" />
+        <POINT id="C44" data="117.397947226,-1.386092119,2.769485730" />
+        <POINT id="C45" data="132.478507860,-19.482764880,-12.311074904" />
+        <POINT id="C46" data="130.126441936,-19.482764880,-12.311074904" />
+        <POINT id="C47" data="130.126441936,-27.894642656,-12.311074904" />
+        <POINT id="C48" data="123.165414376,-17.911037857,-5.234030219" />
+        <POINT id="C49" data="123.165414376,-18.955217790,-5.234030219" />
+        <POINT id="C50" data="116.028898728,-27.894642656,-12.311074904" />
+        <POINT id="C51" data="116.028898728,-26.666144684,-12.311074904" />
+        <POINT id="C52" data="110.822072372,-26.666144684,-12.311074904" />
+        <POINT id="C53" data="110.822072372,-11.435948925,0.000000000" />
+        <POINT id="C54" data="62.475374764,8.420234651,-11.026904486" />
+        <POINT id="C55" data="48.635647948,8.420234651,-11.026904486" />
+        <POINT id="C56" data="54.437765082,-3.183999617,-5.224787351" />
+        <POINT id="C57" data="62.475374764,-3.183999617,-5.224787351" />
+        <POINT id="C58" data="48.635647948,-14.788233885,-11.026904486" />
+        <POINT id="C59" data="62.475374764,-10.527725031,-8.896650059" />
+        <POINT id="C60" data="56.084611483,-14.788233885,-11.026904486" />
+        <POINT id="C61" data="62.475374764,-12.750534370,-8.896650059" />
+        <POINT id="C62" data="56.084611483,-19.141297651,-11.026904486" />
+        <POINT id="C63" data="62.475374764,-19.141297651,-11.026904486" />
+        <POINT id="C64" data="72.639802434,14.037446542,-11.224992590" />
+        <POINT id="C65" data="72.639802434,27.568498936,-11.224992590" />
+        <POINT id="C66" data="83.161076336,27.568498936,-7.279514877" />
+        <POINT id="C67" data="83.161076336,14.037446542,-7.279514877" />
+        <POINT id="C68" data="93.682350238,27.568498936,-11.224992590" />
+        <POINT id="C69" data="84.360958589,14.037446542,-7.729470722" />
+        <POINT id="C70" data="96.315756185,27.568498936,-11.224992590" />
+        <POINT id="C71" data="101.559038988,14.037446542,-7.729470722" />
+        <POINT id="C72" data="101.559038988,27.568498936,-7.729470722" />
+        <POINT id="C73" data="106.802321790,27.568498936,-11.224992590" />
+        <POINT id="C74" data="111.550944138,27.568498936,-11.224992590" />
+        <POINT id="C75" data="111.550944138,14.037446542,-7.729470722" />
+        <POINT id="C76" data="112.026601912,-26.666854149,-11.026904486" />
+        <POINT id="C77" data="112.026601912,-41.490450322,-11.026904486" />
+        <POINT id="C78" data="106.950027880,-26.666854149,-7.938655283" />
+        <POINT id="C79" data="100.140253904,-41.490450322,-11.026904486" />
+        <POINT id="C80" data="105.081452628,-26.666854149,-7.938655283" />
+        <POINT id="C81" data="100.140253904,-39.790196217,-11.026904486" />
+        <POINT id="C82" data="103.331942333,-26.666854149,-9.032099218" />
+        <POINT id="C83" data="102.197902303,-29.501954224,-9.740874237" />
+        <POINT id="C84" data="89.092589998,-39.790196217,-11.026904486" />
+        <POINT id="C85" data="89.092589998,-29.501954224,-9.740874237" />
+        <POINT id="C86" data="65.924604720,-24.093514288,-7.862670267" />
+        <POINT id="C87" data="65.924604720,-18.014545983,-7.862670267" />
+        <POINT id="C88" data="89.539307658,-24.093514288,-6.576423418" />
+        <POINT id="C89" data="102.197902303,-26.666854149,-9.032099218" />
+        <POINT id="C90" data="86.344833380,-50.217815887,-9.282506055" />
+        <POINT id="C91" data="86.344833380,-49.194562228,-8.259252396" />
+        <POINT id="C92" data="88.344833380,-49.194562228,-8.259252396" />
+        <POINT id="C93" data="68.504768932,-50.217815887,-9.282506055" />
+        <POINT id="C94" data="68.504768932,-49.388324557,-8.453014725" />
+        <POINT id="C95" data="67.004768932,-49.388324557,-8.453014725" />
+        <POINT id="C96" data="99.277300074,-30.055667358,0.000000000" />
+        <POINT id="C97" data="99.277300074,-28.981443856,1.074223502" />
+        <POINT id="C98" data="100.777300074,-28.981443856,1.074223502" />
+        <POINT id="C99" data="91.070625426,-30.055667358,0.000000000" />
+        <POINT id="C100" data="91.070625426,-29.066577387,0.989089971" />
+        <POINT id="C101" data="89.019001632,-29.066577387,0.989089971" />
+        <POINT id="C102" data="108.410104320,-28.217937912,0.000000000" />
+        <POINT id="C103" data="108.410104320,-27.279969233,0.937968679" />
+        <POINT id="C104" data="109.910104320,-27.279969233,0.937968679" />
+      </POINTS>
+    </ROOF>
+  </STRUCTURES>
+  <MATERIALS>
+    <MATERIAL id="1" type="" label="None" />
+  </MATERIALS>
+  <OVERALL_SUMMARY>
+    <ATTRIBUTE name="TotalRoofArea" value="6529" />
+    <ATTRIBUTE name="TotalRoofFacets" value="39" />
+    <ATTRIBUTE name="TotalSidingArea" value="0" />
+    <ATTRIBUTE name="TotalSidingAreaLessPenetrations" value="0" />
+    <ATTRIBUTE name="TotalMasonryArea" value="0" />
+    <ATTRIBUTE name="TotalMasonryAreaLessPenetrations" value="0" />
+    <ATTRIBUTE name="PredominantPitch" value="12/12" />
+    <ATTRIBUTE name="NumberOfStories" value="&gt;1" />
+    <ATTRIBUTE name="TotalHipsandRidgesLength" value="421" />
+    <ATTRIBUTE name="TotalRidgesLength" value="107" />
+    <ATTRIBUTE name="TotalHipsLength" value="314" />
+    <ATTRIBUTE name="TotalValleysLength" value="199" />
+    <ATTRIBUTE name="TotalRakesLength" value="573" />
+    <ATTRIBUTE name="TotalEavesLength" value="433" />
+    <ATTRIBUTE name="TotalPenetrationsCount" value="0" />
+    <ATTRIBUTE name="TotalPenetrationsPerimeter" value="0" />
+    <ATTRIBUTE name="TotalPenetrationsArea" value="0" />
+    <ATTRIBUTE name="TotalFlashingLength" value="71" />
+    <ATTRIBUTE name="TotalStepFlashingLength" value="154" />
+    <ATTRIBUTE name="TotalParapetsLength" value="0" />
+    <ATTRIBUTE name="TotalRoofAreaLessPenetrations" value="0" />
+    <ATTRIBUTE name="RoofAreaPerPitch:10/12" value="2308.9" />
+    <ATTRIBUTE name="RoofAreaPerPitch:12/12" value="3043.1" />
+    <ATTRIBUTE name="RoofAreaPerPitch:5/12" value="236.7" />
+    <ATTRIBUTE name="RoofAreaPerPitch:3/12" value="347.4" />
+    <ATTRIBUTE name="RoofAreaPerPitch:6/12" value="268.6" />
+    <ATTRIBUTE name="RoofAreaPerPitch:2/12" value="125.2" />
+    <ATTRIBUTE name="RoofAreaPerPitch:8/12" value="151.1" />
+    <ATTRIBUTE name="RoofAreaPerPitch:4/12" value="43.6" />
+    <ATTRIBUTE name="RoofAreaPerPitch:7/12" value="3.6" />
+    <ATTRIBUTE name="TotalRidgesCount" value="11" />
+    <ATTRIBUTE name="TotalHipsCount" value="17" />
+    <ATTRIBUTE name="TotalValleysCount" value="15" />
+    <ATTRIBUTE name="TotalRakesCount" value="52" />
+    <ATTRIBUTE name="TotalEavesCount" value="36" />
+    <ATTRIBUTE name="StructureComplexity" value="Complex" />
+  </OVERALL_SUMMARY>
+</EAGLEVIEW_EXPORT>

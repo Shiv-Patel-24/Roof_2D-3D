@@ -1,0 +1,64 @@
+/* src/components/ReportHeader.css */
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.header-left .logo h1 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.header-left .tagline {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.header-center .report-info {
+  display: flex;
+  gap: 30px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-item .label {
+  font-size: 11px;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-item .value {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.file-selector {
+  padding: 10px 20px;
+  border: 2px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.file-selector:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.file-selector option {
+  background: #667eea;
+  color: white;
+}
