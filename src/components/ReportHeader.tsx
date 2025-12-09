@@ -1,60 +1,3 @@
-// import './ReportHeader.css';
-
-// interface ReportHeaderProps {
-//   selectedFile: string;
-//   onFileChange: (file: string) => void;
-//   totalFaces: number;
-//   totalLines: number;
-// }
-
-// export const ReportHeader = ({ selectedFile, onFileChange, totalFaces, totalLines }: ReportHeaderProps) => {
-//   return (
-//     <header className="report-header">
-//       <div className="header-left">
-//         <div className="logo">
-//           <h1>🏘️ RoofView</h1>
-//           <p className="tagline">Professional Roof Measurement Analysis</p>
-//         </div>
-//       </div>
-
-//       <div className="header-center">
-//         <div className="report-info">
-//           <div className="info-item">
-//             <span className="label">Total Faces</span>
-//             <span className="value">{totalFaces}</span>
-//           </div>
-//           <div className="info-item">
-//             <span className="label">Total Lines</span>
-//             <span className="value">{totalLines}</span>
-//           </div>
-//           <div className="info-item">
-//             <span className="label">Total Area</span>
-//             <span className="value">
-//               {Math.round(totalFaces * 100)} sq ft
-//             </span>
-//           </div>
-//         </div>
-//       </div>
-
-//       <div className="header-right">
-//         <input type="file" />
-//         <button >Submit</button>
-//         <select 
-//           value={selectedFile}
-//           onChange={(e) => onFileChange(e.target.value)}
-//           className="file-selector"
-//         >
-//           <option value="eagleview-data.xml">Building 1</option>
-//           <option value="eagleview-data-2.xml">Building 2</option>
-          
-//         </select>
-         
-//       </div>
-//     </header>
-//   );
-// };
-
-
 import './ReportHeader.css';
 
 interface ReportHeaderProps {
@@ -67,8 +10,8 @@ interface ReportHeaderProps {
 }
 
 export const ReportHeader = ({ 
-  selectedFile, 
-  onFileChange, 
+  // selectedFile, 
+  // onFileChange, 
   onUploadXml,
   isUploadActive,
   totalFaces, 
@@ -137,7 +80,7 @@ export const ReportHeader = ({
       </div>
 
       <div className="header-right" style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-        <select 
+        {/* <select 
           value={selectedFile}
           onChange={(e) => onFileChange(e.target.value)}
           className="file-selector"
@@ -145,8 +88,8 @@ export const ReportHeader = ({
           style={{ opacity: isUploadActive ? 0.5 : 1 }}
         >
           <option value="eagleview-xml-response-1.xml">Building 1</option>
-          {/* <option value="eagleview-xml-response-2.xml">Building 2</option> */}
-        </select>
+          <option value="eagleview-xml-response-2.xml">Building 2</option>
+        </select> */}
 
         <label 
           className="file-selector upload-btn"

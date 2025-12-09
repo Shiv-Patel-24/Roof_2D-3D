@@ -161,9 +161,17 @@ export interface RoofLine {
   path: Point[];
 }
 
+export interface RoofEave {
+  faceId: string;
+  id: string;
+  type: string;
+  path: Point[];
+}
+
 export interface RoofData {
   faces: RoofFace[];
   lines: RoofLine[];
+  eaves: RoofEave[];
 }
 
 export const parseRoofXML = (xmlString: string): RoofData => {
@@ -181,7 +189,7 @@ export const parseRoofXML = (xmlString: string): RoofData => {
   const structures = eagleview?.STRUCTURES;
   const roof = structures?.ROOF;
 
-  if (!roof) return { faces: [], lines: [] };
+  if (!roof) return { faces: [], lines: [], eaves: [] };
 
   const cleanFloat = (val: any): number => {
     if (val === undefined || val === null) return 0;
@@ -294,5 +302,18 @@ export const parseRoofXML = (xmlString: string): RoofData => {
     }
   });
 
-  return { faces, lines };
+  const eaves: RoofEave[] = [];
+  (roof.EAVES?.EAVE || []).forEach((eave: any) => {
+    if (!eave.path) return;
+    const pIds = eave.path.split(',').map((s: string) => s.trim());
+    const path = pIds.map((pid : any) => pointsMap.get(pid)).filter((p : any): p is Point => p !== undefined);
+    // eaves.push({ id: eave.id, type: eave.type || 'UNKNOWN', path, faceId: eave.faceId });
+    
+
+    if (path.length >= 2) {
+      eaves.push({ id: eave.id, type: eave.type || 'UNKNOWN', path, faceId: eave.faceId  });
+    }
+  });
+
+  return { faces, lines, eaves };
 };
