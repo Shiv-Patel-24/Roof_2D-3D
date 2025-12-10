@@ -1,9 +1,8 @@
-/* src/components/ReportHeader.css */
-.report-header {
+/* .report-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;
+  padding: 10px 30px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -61,4 +60,4 @@
 .file-selector option {
   background: #667eea;
   color: white;
-}
+} */

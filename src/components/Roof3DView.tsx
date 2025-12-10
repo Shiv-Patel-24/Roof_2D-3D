@@ -98,7 +98,7 @@ const RoofPlane = ({ face, globalCenter, faceIndex, isSelected, onToggle }: Roof
       {centerPoint && (
         <mesh position={centerPoint}>
           <sphereGeometry args={[0.25]} />
-          <meshBasicMaterial color="#e74c3c" />
+          <meshBasicMaterial />
         </mesh>
       )}
     </group>
@@ -133,16 +133,17 @@ export const Roof3DView = ({ faces, selectedFaceIds, toggleSelection }: Roof3DVi
   }, [faces]);
 
   if (!faces || faces.length === 0) {
-    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>No Data</div>;
+    // return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>No Data</div>;
+    return <div className="bg-red-500 flex justify-center align-center h-full">No Data</div>;
   }
 
   return (
     <Canvas
       camera={{ position: [50, 60, 50], fov: 45 }}
-      style={{ width: '100%', height: '100%', background: '#f5f7fa' }}
+      // style={{ width: '50%', height: '50%', background: '#f5f7fa' }}
       shadows
     >
-      <color attach="background" args={['#f5f7fa']} />
+      <color attach="background" args={['#0548aeff']} />
       <fog attach="fog" args={['#f5f7fa', 100, 300]} />
 
       <ambientLight intensity={0.7} />

@@ -6,39 +6,42 @@ import { MeasurementsPanel } from "./components/MeasurementsPanel";
 import { ReportHeader } from "./components/ReportHeader";
 import "./App.css";
 
+interface UploadedFile {
+  name: string;
+  xml: string;
+}
+
 export default function App() {
   const [roofData, setRoofData] = useState<RoofData | null>(null);
   const [view, setView] = useState<"2d" | "3d">("2d");
   const [showMeasurements, setShowMeasurements] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // const [selectedFaceForEdit, setSelectedFaceForEdit]= useState<number | null >(null);
+  
   const [selectedFaceIds, setSelectedFaceIds] = useState<string[]>([]);
-  const [selectedFaceForEdit, setSelectedFaceForEdit] = useState<string | null>(
-    null
-  );
+  
+  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
+  const [activeFileName, setActiveFileName] = useState<string | null>(null);
+  const [showFileSidebar, setShowFileSidebar] = useState(false);
 
-  const [selectedBuiltin, setSelectedBuiltin] = useState(
-    "eagleview-data-2.xml");
+  const [selectedBuiltin, setSelectedBuiltin] = useState("eagleview-data-2.xml");
   const [isCustomUpload, setIsCustomUpload] = useState(false);
 
   const loadBuiltinFile = async (filename: string) => {
     setLoading(true);
     setError(null);
     setIsCustomUpload(false);
+    setActiveFileName(filename); 
 
     try {
       const response = await fetch(`/${filename}`);
       if (!response.ok) throw new Error(`Failed to load ${filename}`);
       const xmlText = await response.text();
+      // console.log(xmlText);
 
       const data = parseRoofXML(xmlText);
-
-      if (!data.faces.length) {
-        throw new Error("No roof faces found in XML");
-      }
-
-      // console.log('Parsing successful:', data.faces.length, 'faces,', data.lines.length, 'lines');
+      if (!data.faces.length) throw new Error("No roof faces found in XML");
+      // console.log(data)
       setRoofData(data);
     } catch (e: any) {
       console.error("Error loading built-in file:", e);
@@ -48,50 +51,52 @@ export default function App() {
     }
   };
 
-  // const handleSelectFaceIds = (ids: string[]) => {
-  //   setSelectedFaceIds(ids);
-  //   console.log(ids, "App.tsx code ")
-  // }
+  const handleUpload = (newFiles: UploadedFile[]) => {
+    if (!newFiles || newFiles.length === 0) return;
+    setUploadedFiles((prev) => {
+      const combined = [...prev, ...newFiles];
+      return combined.filter((file, index, self) => 
+        index === self.findIndex((f) => f.name === file.name)
+      );
+    });
+
+    const fileToLoad = newFiles[0];
+    handleSelectFile(fileToLoad.name, fileToLoad.xml);
+    
+    setIsCustomUpload(true);
+    setShowFileSidebar(true); 
+  };
+
+  const handleSelectFile = (fileName: string, xmlContent?: string) => {
+    let xml = xmlContent;
+    if (!xml) {
+      const found = uploadedFiles.find(f => f.name === fileName);
+      if (found) xml = found.xml;
+    }
+
+    if (!xml) return;
+
+    setActiveFileName(fileName);
+    setIsCustomUpload(true);
+    setError(null);
+
+    try {
+      const data = parseRoofXML(xml);
+      console.log(data);
+      setRoofData(data);
+    } catch (e: any) {
+      setError(`Error parsing ${fileName}: ${e.message}`);
+    }
+  };
 
   const toggleSelection = (id: string) => {
     setSelectedFaceIds((prev) => {
-      let updated;
-
       if (prev.includes(id)) {
-        updated = prev.filter((faceId) => faceId !== id);
+        return prev.filter((faceId) => faceId !== id);
       } else {
-        updated = [...prev, id];
+        return [...prev, id];
       }
-
-      if (updated.length === 0) {
-        setSelectedFaceForEdit(null);
-      } else {
-        if (!updated.includes(selectedFaceForEdit || "")) {
-          setSelectedFaceForEdit(updated[0]);
-        }
-      }
-
-      return updated;
     });
-  };
-
-  const handleUpload = (xmlText: string) => {
-    setLoading(true);
-    setError(null);
-    setIsCustomUpload(true);
-    try {
-      const data = parseRoofXML(xmlText);
-      if (!data.faces.length) {
-        throw new Error("No roof faces found in uploaded XML");
-      }
-      // console.log('✅ Upload successful:', data.faces.length, 'faces,', data.lines.length, 'lines');
-      setRoofData(data);
-      setLoading(false);
-    } catch (e: any) {
-      console.error("❌ Parse error:", e);
-      setError(`Parse error: ${e.message}`);
-      setLoading(false);
-    }
   };
 
   useEffect(() => {
@@ -100,8 +105,8 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-800 text-white">
+        <div className="w-10 h-10 border-4 border-sky-400 border-t-transparent rounded-full animate-spin mb-4"></div>
         <p>Loading roof data...</p>
       </div>
     );
@@ -109,21 +114,12 @@ export default function App() {
 
   if (error || !roofData) {
     return (
-      <div className="error-container">
-        <h3>Error Loading Data</h3>
-        <p>{error || "No data available"}</p>
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-800 text-white">
+        <h3 className="text-xl font-bold">Error</h3>
+        <p className="mb-6">{error || "No data available"}</p>
         <button
           onClick={() => loadBuiltinFile(selectedBuiltin)}
-          style={{
-            marginTop: "20px",
-            padding: "10px 20px",
-            background: "#4CAF50",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer",
-            fontSize: "14px",
-          }}
+          className="px-6 py-3 bg-green-500 rounded-lg text-white font-bold hover:bg-green-600"
         >
           Try Again
         </button>
@@ -132,7 +128,7 @@ export default function App() {
   }
 
   return (
-    <div className="dashboard-container">
+    <div className="flex flex-col h-screen bg-white overflow-hidden">
       <ReportHeader
         selectedFile={selectedBuiltin}
         onFileChange={(filename) => {
@@ -141,56 +137,105 @@ export default function App() {
         }}
         onUploadXml={handleUpload}
         isUploadActive={isCustomUpload}
-        totalFaces={roofData.faces.length}
-        totalLines={roofData.lines.length}
       />
 
-      <div className="main-content">
-        <div className="visualization-panel">
-          <div className="view-controls">
+      <div className="flex flex-1 overflow-hidden relative">
+        <div className="flex-1 relative flex flex-col bg-gray-50 border-r border-gray-200">
+          
+          <div className="absolute left-4 top-4 z-10 flex gap-2">
             <button
-              className={`view-btn ${view === "3d" ? "active" : ""}`}
+              className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
+                view === "3d" ? "bg-blue-600 text-white border-blue-600" : "bg-white text-gray-700 hover:bg-gray-100"
+              }`}
               onClick={() => setView("3d")}
             >
-              <span className="icon">🏠</span> 3D View
+              🏠 3D View
             </button>
             <button
-              className={`view-btn ${view === "2d" ? "active" : ""}`}
+              className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
+                view === "2d" ? "bg-blue-600 text-white border-blue-600" : "bg-white text-gray-700 hover:bg-gray-100"
+              }`}
               onClick={() => setView("2d")}
             >
-              <span className="icon">📐</span> 2D Blueprint
+              📐 2D Blueprint
             </button>
             <button
-              className="view-btn"
+              className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
+                showMeasurements ? "bg-blue-600 text-white" : "bg-white text-gray-700 hover:bg-gray-100"
+              }`}
               onClick={() => setShowMeasurements(!showMeasurements)}
             >
-              <span className="icon">📊</span>{" "}
-              {showMeasurements ? "Hide" : "Show"} Data
+              📊 {showMeasurements ? "Hide" : "Show"} Data
+            </button>
+            <button
+              className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
+                showFileSidebar ? "bg-blue-600 text-white" : "bg-white text-gray-700 hover:bg-gray-100"
+              }`}
+              onClick={() => setShowFileSidebar(!showFileSidebar)}
+            >
+               Files ({uploadedFiles.length})
             </button>
           </div>
 
-          <div>
-            <h1>{}</h1>
-          </div>
+          {showFileSidebar && (
+            <div className="absolute right-0 top-16 z-20 w-64 bg-white shadow-2xl border-l border-gray-200 rounded-l-lg overflow-hidden flex flex-col max-h-[80%]">
+              <div className="p-4 bg-gray-100 border-b border-gray-200 flex justify-between items-center">
+                <h3 className="font-bold text-gray-700">Uploaded Files</h3>
+                <button onClick={() => setShowFileSidebar(false)} className="text-gray-400 hover:text-red-500">✕</button>
+              </div>
+              
+              <div className="overflow-y-auto p-2">
+                {uploadedFiles.length === 0 ? (
+                  <p className="text-gray-400 text-center py-4 text-sm">No files uploaded yet.</p>
+                ) : (
+                  <ul className="space-y-1">
+                    {uploadedFiles.map((file, idx) => (
+                      <li
+                        key={`${file.name}-${idx}`}
+                        onClick={() => handleSelectFile(file.name)}
+                        className={`p-3 rounded-md text-sm cursor-pointer transition-colors flex items-center gap-2 ${
+                          activeFileName === file.name
+                            ? "bg-blue-100 text-blue-800 border-l-4 border-blue-500"
+                            : "bg-white hover:bg-gray-50 text-gray-700"
+                        }`}
+                      >
+                        <span className="text-lg">📄</span>
+                        <span className="truncate">{file.name}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          )}
 
-          <div className="view-container">
+          <div className="flex-1 relative size-full overflow-hidden">
             {view === "2d" ? (
               <Roof2DView
                 faces={roofData.faces}
                 lines={roofData.lines}
-                faceId={selectedFaceIds}
+                selectedFaceIds={selectedFaceIds}
                 toggleSelection={toggleSelection}
               />
             ) : (
-              <Roof3DView faces={roofData.faces} lines={roofData.lines} 
-              selectedFaceIds={selectedFaceIds}
-              toggleSelection={toggleSelection}/>
+              <Roof3DView 
+                faces={roofData.faces} 
+                lines={roofData.lines} 
+                selectedFaceIds={selectedFaceIds}
+                toggleSelection={toggleSelection}
+              />
             )}
           </div>
         </div>
 
         {showMeasurements && (
-          <MeasurementsPanel faces={roofData.faces} lines={roofData.lines} />
+          <MeasurementsPanel
+            faces={roofData.faces}
+            lines={roofData.lines}
+            activeFileName={activeFileName}
+            selectedFaceIds={selectedFaceIds}
+            toogleSelection={toggleSelection}
+          />
         )}
       </div>
     </div>

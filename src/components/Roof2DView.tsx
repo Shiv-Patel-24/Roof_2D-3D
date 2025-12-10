@@ -10,7 +10,7 @@ interface Roof2DViewProps {
 }
 
 const LINE_COLORS: Record<string, string> = {
-  RIDGE: "#f81900ff",
+  RIDGE: "#f81900ff" ,
   HIP: "#85453dff",
   VALLEY: "#045c97ff",
   RAKE: "#27ae60",
@@ -59,7 +59,7 @@ export const Roof2DView = ({
 
   const padding = 40;
   const svgWidth = 800;
-  const svgHeight = 600;
+  const svgHeight = 800;
   const dataWidth = bounds.maxX - bounds.minX || 1;
   const dataHeight = bounds.maxY - bounds.minY || 1;
   const scale = Math.min(
@@ -121,7 +121,7 @@ export const Roof2DView = ({
     const pitch1 = pitchValues[firstFace.id] ?? firstFace.pitch;
     const pitch2 = pitchValues[secondFace.id] ?? secondFace.pitch;
 
-    console.log(setPitchValues);
+    // console.log(setPitchValues);
 
     let totalArea = 0;
     if (operation === "add") totalArea = firstFace.size + secondFace.size;
@@ -182,29 +182,32 @@ export const Roof2DView = ({
 
   const combinedData =
     firstFaceForEdit && secondFaceForEdit ? getCombinedRoofData() : null;
-
   return (
     <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "row",
-        overflow: "hidden",
-        background: "#f9f9f9",
-        border: "1px solid #e0e0e0",
-      }}
+      // style={{
+      //   width: "100%",
+      //   height: "100%",
+      //   display: "flex",
+      //   flexDirection: "row",
+      //   overflow: "hidden",
+      //   background: "#f9f9f9",
+      //   border: "1px solid #e0e0e0",
+      // }}
+      className="w-full flex flex-row h-full border-3 border-solid border-black"
     >
-      <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+      <div 
+      // style={{ flex: 1, position: "relative", overflow: "hidden" }} 
+      className="flex-1 relative overflow-hidden">
         <svg
           viewBox={`0 0 ${svgWidth} ${svgHeight}`}
           preserveAspectRatio="xMidYMid meet"
-          style={{
-            width: "100%",
-            height: "100%",
-            cursor: "default",
-            background: "white",
-          }}
+          // style={{
+          //   width: "100%",
+          //   height: "100%",
+          //   cursor: "default",
+          //   background: "white",
+          // }}
+          className="w-full h-full bg-white"
         >
           <defs>
             <pattern
@@ -250,7 +253,7 @@ export const Roof2DView = ({
                   e.stopPropagation();
                   toggleSelection(face.id); 
                 }}
-                style={{ cursor: "pointer", pointerEvents: "all" }}
+                className="cursor-pointer pointer-events-auto"
               >
                 <path
                   d={pathData}
@@ -314,37 +317,40 @@ export const Roof2DView = ({
       </div>
 
       <div
-        style={{
-          width: "360px",
-          background: "#fff",
-          borderLeft: "1px solid #ddd",
-          display: "flex",
-          flexDirection: "column",
-          boxShadow: "-2px 0 10px rgba(0,0,0,0.05)",
-          zIndex: 10,
-        }}
+        // style={{
+        //   width: "360px",
+        //   background: "#fff",
+        //   borderLeft: "1px solid #ddd",
+        //   display: "flex",
+        //   flexDirection: "column",
+        //   boxShadow: "-2px 0 10px rgba(0,0,0,0.05)",
+        //   zIndex: 10,
+        // }}
+        className="w-80 bg-white border-l-1 border-gray-500 flex flex-col z-<10> shadow-(<-2px 0 10px rgba(0,0,0,0.05)>)"
       >
         <div
-          style={{
-            padding: "20px",
-            borderBottom: "1px solid #eee",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+          // style={{
+          //   padding: "20px",
+          //   borderBottom: "1px solid #eee",
+          //   display: "flex",
+          //   justifyContent: "space-between",
+          //   alignItems: "center",
+          // }}
+          className="pt-3 pl-4 h-[5rem] border-b-1 border-white flex justify-between align-center bg-gray-200"
         >
-          <h3 style={{ margin: 0, color: "#2c3e50" }}>Roof Details</h3>
-          <div style={{ display: "flex", gap: 8 }}>
+          <h3  className="text-blue-800 m-0 font-bold text-xl">Roof Details</h3>
+          <div  className="flex gap-8">
             <button
               onClick={selectAll}
-              style={{
-                padding: "8px 10px",
-                background: "#2d98da",
-                color: "white",
-                border: "none",
-                borderRadius: 6,
-                cursor: "pointer",
-              }}
+              // style={{
+              //   padding: "8px 10px",
+              //   background: "#2d98da",
+              //   color: "white",
+              //   border: "none",
+              //   borderRadius: 6,
+              //   cursor: "pointer",
+              // }}
+              className=" bg-blue-300 text-black border-none rounded-xl cursor-pointer h-[2rem] w-[5rem] mb-2 "
             >
               {selectedIds.length === faces.length
                 ? "Unselect All"
@@ -353,14 +359,15 @@ export const Roof2DView = ({
             {selectedIds.length > 0 && (
               <button
                 onClick={handleClear}
-                style={{
-                  background: "#e74c3c",
-                  color: "white",
-                  border: "none",
-                  padding: "8px 10px",
-                  borderRadius: "6px",
-                  cursor: "pointer",
-                }}
+                // style={{
+                //   background: "#e74c3c",
+                //   color: "white",
+                //   border: "none",
+                //   padding: "8px 10px",
+                //   borderRadius: "6px",
+                //   cursor: "pointer",
+                // }}
+                className="bg-red-500 rounded-xl cursor-pointer  h-[3rem] w-[5rem] text-white"
               >
                 Reset ✖
               </button>
@@ -369,22 +376,23 @@ export const Roof2DView = ({
         </div>
 
         {selectedIds.length > 0 && (
-          <div style={{ padding: 16, borderBottom: "1px solid #eee"}}>
-            <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-              <div style={{ flex: 1 }}>
-                <label style={{ fontSize: 12, color: "#666" }}>
+          <div className="p-4 border-b-1 border-solid border-white gap-8 ">
+            <div className="flex gap-8 mb-2">
+              <div  className="flex-1">
+                <label className="block mb-2.5 text-sm font-medium text-heading">
                   First Roof Section
                 </label>
                 <select
                   value={firstFaceForEdit ?? ""}
                   onChange={(e) => setFirstFaceForEdit(e.target.value || null)}
-                  style={{ width: "100%", padding: 8, marginTop: 6 }}
+                  // style={{ width: "100%", padding: 8, marginTop: 6 }}
+                  className="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                 >
-                  <option value="">Select</option>
+                  <option value="" className="border-2 border-solid">Select</option>
                   {selectedIds.map((id) => {
                     const f = faces.find((x) => x.id === id);
                     return f ? (
-                      <option key={id} value={id}>
+                      <option key={id} value={id} >
                         {f.designator} — {Math.round(f.size)} sq ft | {f.pitch}{" "}
                         Pitch
                       </option>
@@ -393,14 +401,15 @@ export const Roof2DView = ({
                 </select>
               </div>
 
-              <div style={{ flex: 1 }}>
-                <label style={{ fontSize: 12, color: "#666" }}>
+              <div className="flex-1">
+                <label className="block mb-2.5 text-sm font-medium text-heading">
                   Second Roof Section
                 </label>
                 <select
                   value={secondFaceForEdit ?? ""}
                   onChange={(e) => setSecondFaceForEdit(e.target.value || null)}
-                  style={{ width: "100%", padding: 8, marginTop: 6 }}
+                  // style={{ width: "100%", padding: 8, marginTop: 6 }}
+                  className="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                 >
                   <option value="">Select</option>
                   {selectedIds.map((id) => {
@@ -417,20 +426,21 @@ export const Roof2DView = ({
             </div>
 
             <div
-              style={{
-                display: "flex",
-                gap: 8,
-                alignItems: "center",
-                marginBottom: 8,
-              }}
+              // style={{
+              //   display: "flex",
+              //   gap: 8,
+              //   alignItems: "center",
+              //   marginBottom: 8,
+              // }}
+              className="flex gap-8 align-center mb-3"
             >
-              <label style={{ fontSize: 12, color: "#666", minWidth: 72 }}>
+              <label  className="block mb-2.5 text-sm font-medium text-heading ">
                 Operation
               </label>
               <select
                 value={operation}
                 onChange={(e) => setOperation(e.target.value as "add" | "sub")}
-                style={{ padding: 8 }}
+                className="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
               >
                 <option value="add">Add</option>
                 <option value="sub">Subtract</option>
@@ -441,47 +451,33 @@ export const Roof2DView = ({
 
         {/* Combined Results */}
         {combinedData && (
-          <div
-            style={{
-              padding: 16,
-              borderBottom: "1px solid #eee",
-              background: "#f8f9fa",
-              color: "black"
-            }}
-          >
-            <div style={{ fontWeight: "bold", fontSize: 16, marginBottom: 8}}>
+          <div className="p-1 border-solid border-gray-500 bg-gray-200 text-black ">
+            <div className=" text-base font-bold  ">
               Combined Roof Data
             </div>
-            <div style={{ fontSize: 14 }}>
+            <div className="text-base" >
               Total Area: {Math.round(combinedData.totalArea)} sq ft
             </div>
-            <div style={{ fontSize: 14 }}>
+            <div className="text-base">
               Pitch: {combinedData.combinedPitch}/12
             </div>
 
-            <div style={{ marginTop: 10 }}>
-              <h4 style={{ margin: "8px 0 6px 0" }}>Combined Line Lengths</h4>
+            <div className="mt-5 text-lg">
+              <h4 className=" font-bold ">Combined Line Lengths</h4>
               {Object.entries(combinedData.combined).map(([type, len]) => (
-                <div key={type} style={{ fontSize: 13 }}>
+                <div key={type} className="text-base">
                   {type} — {len.toFixed(1)} ft
                 </div>
               ))}
             </div>
 
-            <div style={{ marginTop: 12 }}>
+            <div className="mt-5">
               <button
                 onClick={() => {
                   setFirstFaceForEdit(null);
                   setSecondFaceForEdit(null);
                 }}
-                style={{
-                  background: "#95a5a6",
-                  color: "white",
-                  border: "none",
-                  padding: "8px 10px",
-                  borderRadius: 6,
-                  cursor: "pointer",
-                }}
+                className="bg-red-700 text-white rounded-md cursor-pointer w-[4rem] h-[2rem]"
               >
                 Close
               </button>
@@ -489,25 +485,16 @@ export const Roof2DView = ({
           </div>
         )}
 
-        <div style={{ padding: 20, overflowY: "auto", flex: 1 }}>
+        <div className=" overflow-auto flex-1">
           <div
-            style={{
-              marginBottom: 16,
-              padding: 12,
-              background: "#f8f9fa",
-              borderRadius: 8,
-            }}
+            className="h-[5rem] rounded-lg mb-3 bg-gray-300 mt-2 p-2 w-[18rem] ml-4"
           >
             <div
-              style={{
-                fontSize: 11,
-                color: "#7f8c8d",
-                textTransform: "uppercase",
-              }}
+              className="text-gray-500 uppercase text-xs"
             >
               Total Project Area
             </div>
-            <div style={{ fontSize: 20, fontWeight: "bold", color: "#2c3e50" }}>
+            <div className="text-xl text-blue-800 font-bold">
               {Math.round(totalProjectArea)} sq ft
             </div>
           </div>
@@ -515,87 +502,50 @@ export const Roof2DView = ({
           {selectedIds.length > 0 ? (
             <>
               <div
-                style={{
-                  marginBottom: 12,
-                  padding: 16,
-                  background: "#34495e",
-                  color: "white",
-                  borderRadius: 8,
-                }}
+                className="h-[5rem] rounded-lg mb-3 bg-indigo-900 mt-2 p-2 w-[18rem] ml-4 text-white"
               >
                 <div
-                  style={{
-                    fontSize: 12,
-                    opacity: 0.9,
-                    textTransform: "uppercase",
-                  }}
+                  className="text-xs opacity-[.67] uppercase"
                 >
                   Selected Area ({selectedIds.length})
                 </div>
-                <div style={{ fontSize: 28, fontWeight: "bold" }}>
+                <div  className="text-2xl font-bold">
                   {Math.round(totalSelectedArea)} sq ft
                 </div>
               </div>
 
               <h4
-                style={{
-                  margin: "0 0 12px 0",
-                  color: "#666",
-                  fontSize: 13,
-                  textTransform: "uppercase",
-                }}
+                className="mb-2 text-gray-500 uppercase"
               >
                 Selected Sections
               </h4>
 
               <div
-                style={{ display: "flex", flexDirection: "column", gap: 10 }}
+                // style={{ display: "flex", flexDirection: "column", gap: 10 }}
+                className="flex flex-col gap-3 "
               >
                 {selectedFaces.map((f) => (
                   <div
                     key={f.id}
-                    style={{
-                      border: "1px solid #e0e0e0",
-                      borderRadius: 6,
-                      padding: 12,
-                      background: "#fff",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
+                    className="p-2 border border-solid border-gray-500 rounded-md bg-white flex items-center"
                   >
                     <div
-                      style={{
-                        width: 40,
-                        height: 40,
-                        background: "#3498db",
-                        color: "white",
-                        borderRadius: "50%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontWeight: "bold",
-                        marginRight: 12,
-                      }}
+                      className="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center font-bold mr-6"
                     >
                       {f.designator}
                     </div>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: "bold", color: "#2c3e50" }}>
+                    <div className="flex-1">
+                      <div className="font-bold text-blue-900">
                         {Math.round(f.size)} sq ft
                       </div>
-                      <div style={{ fontSize: 12, color: "#7f8c8d" }}>
-                        Pitch: {f.pitch}/12 • 
+                      <div className="text-sm text-gray-400">
+                        Pitch: {f.pitch}/12 
                       </div>
                     </div>
                     <button
                       onClick={() => removeSingleSelection(f.id)}
-                      style={{
-                        background: "none",
-                        border: "none",
-                        color: "#e74c3c",
-                        fontSize: 18,
-                        cursor: "pointer",
-                      }}
+                     
+                      className="bg-none border-none text-sm cursor-pointer text-red-900"
                     >
                       ×
                     </button>
@@ -604,46 +554,33 @@ export const Roof2DView = ({
               </div>
 
               <div
-                style={{
-                  marginTop: 24,
-                  paddingTop: 12,
-                  borderTop: "2px solid #eee",
-                }}
+                className="mt-5 pt-5 border-t border-gray-400"
               >
-                <h4 style={{ margin: "0 0 12px 0", color: "#2c3e50" }}>
+                <h4  className="mb-4 text-blue-900">
                   Line Details
                 </h4>
 
                 {selectedFaces.map((face) => {
                   const totals = getLineTotalsForFace(face);
                   return (
-                    <div key={face.id} style={{ marginBottom: 14 }}>
+                    <div key={face.id} className="mb-4">
                       <h5
-                        style={{
-                          margin: "0 0 8px 0",
-                          color: "#34495e",
-                          fontSize: 12,
-                        }}
+                        className="mb-4 text-blue-800"
                       >
                         {face.designator} Lines
                       </h5>
                       {Object.entries(totals).map(([type, len]) => (
                         <div
                           key={type}
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            padding: "6px 4px",
-                            borderBottom: "1px solid #f9f9f9",
-                            fontSize: 13,
-                          }}
+                          className="flex justify-between mb-2 text-sm"
                         >
                           <div
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: 8,
-                            }}
+                            // style={{
+                            //   display: "flex",
+                            //   alignItems: "center",
+                            //   gap: 8,
+                            // }}
+                            className="flex align-center gap-4 "
                           >
                             <div
                               style={{
@@ -668,7 +605,7 @@ export const Roof2DView = ({
                               {type} • Pitch {face.pitch}/12
                             </span>
                           </div>
-                          <strong style={{ color: "#2c3e50" }}>
+                          <strong className="text-blue-800">
                             {len.toFixed(1)} ft
                           </strong>
                         </div>
@@ -680,17 +617,9 @@ export const Roof2DView = ({
             </>
           ) : (
             <div
-              style={{
-                textAlign: "center",
-                color: "#95a5a6",
-                marginTop: 60,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 12,
-              }}
+              className="text-center text-gray-500 mt-50 flex flex-col align-center gap-10"
             >
-              <span style={{ fontSize: 40 }}>👆</span>
+              <span className="font-4xl">👆</span>
               <p>
                 Click multiple areas on the blueprint to calculate total
                 materials.
