@@ -121,7 +121,7 @@ export const Roof2DView = ({
     const pitch1 = pitchValues[firstFace.id] ?? firstFace.pitch;
     const pitch2 = pitchValues[secondFace.id] ?? secondFace.pitch;
 
-    // console.log(setPitchValues);
+    console.log(setPitchValues);
 
     let totalArea = 0;
     if (operation === "add") totalArea = firstFace.size + secondFace.size;
@@ -547,7 +547,7 @@ export const Roof2DView = ({
                      
                       className="bg-none border-none text-sm cursor-pointer text-red-900"
                     >
-                      ×
+                dfdf    cxcx  ×
                     </button>
                   </div>
                 ))}

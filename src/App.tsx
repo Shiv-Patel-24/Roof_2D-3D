@@ -234,7 +234,7 @@ export default function App() {
             lines={roofData.lines}
             activeFileName={activeFileName}
             selectedFaceIds={selectedFaceIds}
-            toogleSelection={toggleSelection}
+            toggleSelection={toggleSelection}
           />
         )}
       </div>
