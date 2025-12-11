@@ -7,21 +7,32 @@ interface MeasurementsPanelProps {
   activeFileName: string | null;
   selectedFaceIds: string[];
   toggleSelection: (id: string) => void; 
+  // isSelected : boolean;
 }
 
 export const MeasurementsPanel = ({
   faces,
   lines,
   activeFileName,
-  toggleSelection
+  toggleSelection,
+  selectedFaceIds
 }: MeasurementsPanelProps) => {
-  const [activeTab, setActiveTab] = useState<"faces" | "lines" | "summary">(
+    const [activeTab, setActiveTab] = useState<"faces" | "lines" | "summary">(
     "faces"
   );
 
   const totalArea = faces.reduce((sum, face) => sum + face.size, 0);
-  const avgPitch =
-    faces.reduce((sum, face) => sum + face.pitch, 0) / (faces.length || 1);
+  const avgPitch = faces.reduce((sum, face) => sum + face.pitch, 0) / (faces.length || 1);
+
+  const sortedFaces = [...faces].sort((a, b) => {
+   const aSelected = selectedFaceIds.includes(a.id);
+   const bSelected = selectedFaceIds.includes(b.id);
+
+   if (aSelected && !bSelected) return -1; 
+   if (!aSelected && bSelected) return 1;
+   return 0;
+ });
+
 
   return (
     <div className="w-[350px] flex flex-col bg-white border-l border-gray-200 shadow-lg z-20">
@@ -68,13 +79,13 @@ export const MeasurementsPanel = ({
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100" >
-              {faces.map((face) => (
-                // Now, I have to do when i click on face.designator, face.pitch, face.size any place. Then it will select the Roof Face and also visible in Roof2DView and Roof3Dview.
+             
+                {sortedFaces.map(face => 
                 <tr
                   key={face.id}
                   onClick={() => toggleSelection(face.id)}
-                  className="hover:bg-blue-50 transition-colors"
-                >
+                  className={`hover:bg-blue-50 transition-colors ${selectedFaceIds.includes(face.id) ? 'bg-blue-100' : ''}`}
+                  >
                   <td className="p-3 font-medium text-blue-600 " >
                     {face.designator}
                   </td>
@@ -83,7 +94,8 @@ export const MeasurementsPanel = ({
                     {Math.round(face.size)}
                   </td>
                 </tr>
-              ))}
+                )}
+              
             </tbody>
           </table>
         )}
@@ -98,7 +110,7 @@ export const MeasurementsPanel = ({
             </thead>
             <tbody className="divide-y divide-gray-100">
               {lines.map((line) => (
-                <tr key={line.id} className="hover:bg-gray-50">
+                <tr key={line.id} className="hover:bg-gray-50" >
                   <td className="p-3">
                     <span
                       className={`px-2 py-1 rounded text-xs font-bold uppercase
@@ -108,6 +120,7 @@ export const MeasurementsPanel = ({
                          : line.type === "EAVE"
                          ? "bg-green-100 text-green-700"
                          : "bg-gray-100 text-gray-700"
+                         
                      }
                    `}
                     >
@@ -128,6 +141,7 @@ export const MeasurementsPanel = ({
             <SummaryCard
               label="Total Area"
               value={`${Math.round(totalArea)} sq ft`}
+              
             />
             <SummaryCard label="Avg Pitch" value={`${avgPitch.toFixed(1)}°`} />
             <SummaryCard label="Total Faces" value={faces.length} />

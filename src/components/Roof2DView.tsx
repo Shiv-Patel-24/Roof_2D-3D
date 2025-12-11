@@ -7,6 +7,7 @@ interface Roof2DViewProps {
   selectedFaceIds?: string[];
   faceId?: string[];
   toggleSelection: (id: string) => void;
+  onFaceSelect?: (id: string) => void;
 }
 
 const LINE_COLORS: Record<string, string> = {
@@ -184,29 +185,13 @@ export const Roof2DView = ({
     firstFaceForEdit && secondFaceForEdit ? getCombinedRoofData() : null;
   return (
     <div
-      // style={{
-      //   width: "100%",
-      //   height: "100%",
-      //   display: "flex",
-      //   flexDirection: "row",
-      //   overflow: "hidden",
-      //   background: "#f9f9f9",
-      //   border: "1px solid #e0e0e0",
-      // }}
       className="w-full flex flex-row h-full border-3 border-solid border-black"
     >
       <div 
-      // style={{ flex: 1, position: "relative", overflow: "hidden" }} 
       className="flex-1 relative overflow-hidden">
         <svg
           viewBox={`0 0 ${svgWidth} ${svgHeight}`}
           preserveAspectRatio="xMidYMid meet"
-          // style={{
-          //   width: "100%",
-          //   height: "100%",
-          //   cursor: "default",
-          //   background: "white",
-          // }}
           className="w-full h-full bg-white"
         >
           <defs>
@@ -284,7 +269,7 @@ export const Roof2DView = ({
                     const midY = (p1.lat + p2.lat) / 2;
                     const svgMid = toSVG(midX, midY);
                     const { color } = getLineInfo(p1, p2);
-
+                    
                     return (
                       <g key={`lbl-${face.id}-${i}`}>
                         <rect
@@ -307,6 +292,7 @@ export const Roof2DView = ({
                         >
                           {Math.round(length)}'
                         </text>
+                        
                       </g>
                     );
                   })}
@@ -317,39 +303,15 @@ export const Roof2DView = ({
       </div>
 
       <div
-        // style={{
-        //   width: "360px",
-        //   background: "#fff",
-        //   borderLeft: "1px solid #ddd",
-        //   display: "flex",
-        //   flexDirection: "column",
-        //   boxShadow: "-2px 0 10px rgba(0,0,0,0.05)",
-        //   zIndex: 10,
-        // }}
         className="w-80 bg-white border-l-1 border-gray-500 flex flex-col z-<10> shadow-(<-2px 0 10px rgba(0,0,0,0.05)>)"
       >
         <div
-          // style={{
-          //   padding: "20px",
-          //   borderBottom: "1px solid #eee",
-          //   display: "flex",
-          //   justifyContent: "space-between",
-          //   alignItems: "center",
-          // }}
           className="pt-3 pl-4 h-[5rem] border-b-1 border-white flex justify-between align-center bg-gray-200"
         >
           <h3  className="text-blue-800 m-0 font-bold text-xl">Roof Details</h3>
           <div  className="flex gap-8">
             <button
               onClick={selectAll}
-              // style={{
-              //   padding: "8px 10px",
-              //   background: "#2d98da",
-              //   color: "white",
-              //   border: "none",
-              //   borderRadius: 6,
-              //   cursor: "pointer",
-              // }}
               className=" bg-blue-300 text-black border-none rounded-xl cursor-pointer h-[2rem] w-[5rem] mb-2 "
             >
               {selectedIds.length === faces.length
@@ -359,14 +321,6 @@ export const Roof2DView = ({
             {selectedIds.length > 0 && (
               <button
                 onClick={handleClear}
-                // style={{
-                //   background: "#e74c3c",
-                //   color: "white",
-                //   border: "none",
-                //   padding: "8px 10px",
-                //   borderRadius: "6px",
-                //   cursor: "pointer",
-                // }}
                 className="bg-red-500 rounded-xl cursor-pointer  h-[3rem] w-[5rem] text-white"
               >
                 Reset ✖
@@ -385,7 +339,6 @@ export const Roof2DView = ({
                 <select
                   value={firstFaceForEdit ?? ""}
                   onChange={(e) => setFirstFaceForEdit(e.target.value || null)}
-                  // style={{ width: "100%", padding: 8, marginTop: 6 }}
                   className="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                 >
                   <option value="" className="border-2 border-solid">Select</option>
@@ -408,7 +361,6 @@ export const Roof2DView = ({
                 <select
                   value={secondFaceForEdit ?? ""}
                   onChange={(e) => setSecondFaceForEdit(e.target.value || null)}
-                  // style={{ width: "100%", padding: 8, marginTop: 6 }}
                   className="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                 >
                   <option value="">Select</option>
@@ -426,12 +378,6 @@ export const Roof2DView = ({
             </div>
 
             <div
-              // style={{
-              //   display: "flex",
-              //   gap: 8,
-              //   alignItems: "center",
-              //   marginBottom: 8,
-              // }}
               className="flex gap-8 align-center mb-3"
             >
               <label  className="block mb-2.5 text-sm font-medium text-heading ">
@@ -449,7 +395,6 @@ export const Roof2DView = ({
           </div>
         )}
 
-        {/* Combined Results */}
         {combinedData && (
           <div className="p-1 border-solid border-gray-500 bg-gray-200 text-black ">
             <div className=" text-base font-bold  ">
@@ -502,7 +447,7 @@ export const Roof2DView = ({
           {selectedIds.length > 0 ? (
             <>
               <div
-                className="h-[5rem] rounded-lg mb-3 bg-indigo-900 mt-2 p-2 w-[18rem] ml-4 text-white"
+                className="h-[5rem] rounded-lg mb-3 bg-indigo-900 mt-2 p-2 w-[18rem] ml-4 text-white"  onClick={selectAll}
               >
                 <div
                   className="text-xs opacity-[.67] uppercase"
@@ -521,7 +466,6 @@ export const Roof2DView = ({
               </h4>
 
               <div
-                // style={{ display: "flex", flexDirection: "column", gap: 10 }}
                 className="flex flex-col gap-3 "
               >
                 {selectedFaces.map((f) => (
@@ -544,10 +488,9 @@ export const Roof2DView = ({
                     </div>
                     <button
                       onClick={() => removeSingleSelection(f.id)}
-                     
                       className="bg-none border-none text-sm cursor-pointer text-red-900"
                     >
-                dfdf    cxcx  ×
+                     ×
                     </button>
                   </div>
                 ))}
@@ -575,11 +518,6 @@ export const Roof2DView = ({
                           className="flex justify-between mb-2 text-sm"
                         >
                           <div
-                            // style={{
-                            //   display: "flex",
-                            //   alignItems: "center",
-                            //   gap: 8,
-                            // }}
                             className="flex align-center gap-4 "
                           >
                             <div

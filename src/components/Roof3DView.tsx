@@ -13,7 +13,7 @@ interface RoofPlaneProps {
   onToggle: (id: string) => void;
 }
 
-const RoofPlane = ({ face, globalCenter, faceIndex, isSelected, onToggle }: RoofPlaneProps) => {
+const RoofPlane = ({ face, globalCenter, faceIndex, isSelected, onToggle}: RoofPlaneProps) => {
   const { geometry, edges, centerPoint } = useMemo(() => {
     if (!face.path || face.path.length < 3) {
       return { geometry: null as THREE.BufferGeometry | null, edges: [] as [THREE.Vector3, THREE.Vector3][], centerPoint: null as THREE.Vector3 | null };

@@ -97,6 +97,7 @@ export default function App() {
         return [...prev, id];
       }
     });
+    setShowMeasurements(true)
   };
 
   useEffect(() => {
@@ -222,7 +223,8 @@ export default function App() {
                 faces={roofData.faces} 
                 lines={roofData.lines} 
                 selectedFaceIds={selectedFaceIds}
-                toggleSelection={toggleSelection}
+                toggleSelection={ toggleSelection }
+                // showMeasurements={true}
               />
             )}
           </div>
