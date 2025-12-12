@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { RoofFace, RoofLine } from "../utils/xmlParser";
 
 interface MeasurementsPanelProps {
@@ -6,8 +6,8 @@ interface MeasurementsPanelProps {
   lines: RoofLine[];
   activeFileName: string | null;
   selectedFaceIds: string[];
-  toggleSelection: (id: string) => void; 
-  // isSelected : boolean;
+  toggleSelection: (id: string) => void;
+  // setActiveTab: (tab: "faces" | "lines" | "summary") => void;
 }
 
 export const MeasurementsPanel = ({
@@ -15,24 +15,33 @@ export const MeasurementsPanel = ({
   lines,
   activeFileName,
   toggleSelection,
-  selectedFaceIds
+  selectedFaceIds,
 }: MeasurementsPanelProps) => {
-    const [activeTab, setActiveTab] = useState<"faces" | "lines" | "summary">(
-    "faces"
-  );
+  const [activeTab, setActiveTab] = useState<"faces" | "lines" | "summary">("faces");
 
   const totalArea = faces.reduce((sum, face) => sum + face.size, 0);
-  const avgPitch = faces.reduce((sum, face) => sum + face.pitch, 0) / (faces.length || 1);
+  const avgPitch =
+    faces.reduce((sum, face) => sum + face.pitch, 0) / (faces.length || 1);
 
   const sortedFaces = [...faces].sort((a, b) => {
-   const aSelected = selectedFaceIds.includes(a.id);
-   const bSelected = selectedFaceIds.includes(b.id);
+    const aSelected = selectedFaceIds.includes(a.id);
+    const bSelected = selectedFaceIds.includes(b.id);
 
-   if (aSelected && !bSelected) return -1; 
-   if (!aSelected && bSelected) return 1;
-   return 0;
- });
+    if (aSelected && !bSelected) return -1;
+    if (!aSelected && bSelected) return 1;
+    return 0;
+  });
 
+  // using state lifting. I have to setActiveTab to faces. Whenever i click on any faces, then it will directly everytime faces. setActive is availble in MeasuremntsPanel. For app.tsx only getting toggleselection, faces, lines, activeFileName, selectedFaceIds
+  useEffect(() => {
+    //  return () => {
+      setActiveTab("faces");
+
+      // return ()=>{
+        
+      // }
+    //  }
+  }, [selectedFaceIds])
 
   return (
     <div className="w-[350px] flex flex-col bg-white border-l border-gray-200 shadow-lg z-20">
@@ -78,15 +87,16 @@ export const MeasurementsPanel = ({
                 <th className="p-3 text-right">Area</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100" >
-             
-                {sortedFaces.map(face => 
+            <tbody className="divide-y divide-gray-100">
+              {sortedFaces.map((face) => (
                 <tr
                   key={face.id}
-                  onClick={() => toggleSelection(face.id)}
-                  className={`hover:bg-blue-50 transition-colors ${selectedFaceIds.includes(face.id) ? 'bg-blue-100' : ''}`}
-                  >
-                  <td className="p-3 font-medium text-blue-600 " >
+                  onClick={() => {toggleSelection(face.id); setActiveTab("faces")}}
+                  className={`hover:bg-blue-50 transition-colors ${
+                    selectedFaceIds.includes(face.id) ? "bg-blue-100" : ""
+                  }`}
+                >
+                  <td className="p-3 font-medium text-blue-600 ">
                     {face.designator}
                   </td>
                   <td className="p-3">{face.pitch}°</td>
@@ -94,8 +104,7 @@ export const MeasurementsPanel = ({
                     {Math.round(face.size)}
                   </td>
                 </tr>
-                )}
-              
+              ))}
             </tbody>
           </table>
         )}
@@ -104,13 +113,19 @@ export const MeasurementsPanel = ({
           <table className="w-full text-sm text-left">
             <thead className="bg-gray-50 text-gray-500 font-medium sticky top-0">
               <tr>
+                <th className="p-3">ID</th>
                 <th className="p-3">Type</th>
                 <th className="p-3 text-right">Length</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {lines.map((line) => (
-                <tr key={line.id} className="hover:bg-gray-50" >
+                <tr
+                  key={line.id}
+                  className="hover:bg-gray-50"
+                  // onClick={() => toggleSelection(lines.id)}
+                >
+                  <td className="ml-2">{` ${line.id}  `} </td>
                   <td className="p-3">
                     <span
                       className={`px-2 py-1 rounded text-xs font-bold uppercase
@@ -118,9 +133,22 @@ export const MeasurementsPanel = ({
                        line.type === "RIDGE"
                          ? "bg-red-100 text-red-700"
                          : line.type === "EAVE"
-                         ? "bg-green-100 text-green-700"
+                         ? "bg-purple-100 text-purple-700"
                          : "bg-gray-100 text-gray-700"
-                         
+                     }
+                     ${
+                      line.type === "RAKE" 
+                      ? "bg-green-100 text-green-800"
+                      : line.type === "WALL"
+                      ? "bg-gray-100 text-gray-100"
+                      : "bg-gray-200 text-gray-200"
+                     }
+                     ${
+                      line.type === "VALLEY"
+                      ? "bg-blue-100 text-blue-600"
+                      : line.type === "STEPFLASH"
+                      ? "bg-orange-100 text-orange-600"
+                      : "bg-gray-300 text-gray-900"
                      }
                    `}
                     >
@@ -128,7 +156,7 @@ export const MeasurementsPanel = ({
                     </span>
                   </td>
                   <td className="p-3 text-right text-gray-600">
-                    {line.path.length} pts
+                    {line.path.length} pts 
                   </td>
                 </tr>
               ))}
@@ -141,7 +169,6 @@ export const MeasurementsPanel = ({
             <SummaryCard
               label="Total Area"
               value={`${Math.round(totalArea)} sq ft`}
-              
             />
             <SummaryCard label="Avg Pitch" value={`${avgPitch.toFixed(1)}°`} />
             <SummaryCard label="Total Faces" value={faces.length} />

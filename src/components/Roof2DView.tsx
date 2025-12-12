@@ -102,7 +102,6 @@ export const Roof2DView = ({
       const p2 = face.path[(i + 1) % face.path.length];
       const length = getLength(p1, p2);
       const { type } = getLineInfo(p1, p2);
-
       if (type === "UNKNOWN") return;
 
       if (!totals[type]) totals[type] = 0;
@@ -122,7 +121,7 @@ export const Roof2DView = ({
     const pitch1 = pitchValues[firstFace.id] ?? firstFace.pitch;
     const pitch2 = pitchValues[secondFace.id] ?? secondFace.pitch;
 
-    console.log(setPitchValues);
+    console.log(setPitchValues, "getCombinedRoofData");
 
     let totalArea = 0;
     if (operation === "add") totalArea = firstFace.size + secondFace.size;
@@ -137,6 +136,7 @@ export const Roof2DView = ({
           )
         : pitch1;
 
+    console.log(combinedPitch);
     const totals1 = getLineTotalsForFace(firstFace);
     const totals2 = getLineTotalsForFace(secondFace);
     const combined: Record<string, number> = {};
@@ -281,9 +281,10 @@ export const Roof2DView = ({
                           fill={color}
                           opacity="0.9"
                         />
-                        <text
-                          x={svgMid.x}
-                          y={svgMid.y + 4}
+                      
+                            <text
+                              x={svgMid.x}
+                              y={svgMid.y + 4}
                           textAnchor="middle"
                           fill="#fff"
                           fontSize="10"
@@ -447,7 +448,7 @@ export const Roof2DView = ({
           {selectedIds.length > 0 ? (
             <>
               <div
-                className="h-[5rem] rounded-lg mb-3 bg-indigo-900 mt-2 p-2 w-[18rem] ml-4 text-white"  onClick={selectAll}
+                className="h-[5rem] rounded-lg mb-3 bg-indigo-900 mt-2 p-2 w-[18rem] ml-4 text-white cursor-pointer"  onClick={selectAll} 
               >
                 <div
                   className="text-xs opacity-[.67] uppercase"
@@ -506,9 +507,10 @@ export const Roof2DView = ({
                 {selectedFaces.map((face) => {
                   const totals = getLineTotalsForFace(face);
                   return (
-                    <div key={face.id} className="mb-4">
+                    <div key={face.id} className="mb-4 cursor-pointer">
                       <h5
-                        className="mb-4 text-blue-800"
+                        className="mb-4 text-blue-800  font-black"
+                        // onClick={handleForHighlightLines}
                       >
                         {face.designator} Lines
                       </h5>

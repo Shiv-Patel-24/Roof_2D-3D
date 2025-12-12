@@ -17,31 +17,61 @@ export default function App() {
   const [showMeasurements, setShowMeasurements] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   const [selectedFaceIds, setSelectedFaceIds] = useState<string[]>([]);
-  
+
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [activeFileName, setActiveFileName] = useState<string | null>(null);
   const [showFileSidebar, setShowFileSidebar] = useState(false);
 
-  const [selectedBuiltin, setSelectedBuiltin] = useState("eagleview-data-2.xml");
+  const [selectedBuiltin, setSelectedBuiltin] = useState(
+    "eagleview-data-2.xml"
+  );
   const [isCustomUpload, setIsCustomUpload] = useState(false);
+  // const [count, setCount] = useState<number>(0);
+  const [second, setSecond] = useState<number> (0);
+  const [running, setRunning] = useState(false);
+  // useEffect( () => {
+  //   setTimeout(() => {
+  //     setCount(count + 1);
+  //   }, 5000)
+  // }, [count])
+
+useEffect(() => {
+  if (!running) return;
+
+  const interval = setInterval(() => {
+    setSecond(prev => {
+      if (prev >= 9) {      
+        setRunning(false); 
+        return 10;
+      }
+      return prev + 1;
+    });
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, [running]);
+
+
+  const handleSecondHold = () => {
+    setSecond(0);
+    setRunning(true)
+  }
 
   const loadBuiltinFile = async (filename: string) => {
     setLoading(true);
     setError(null);
     setIsCustomUpload(false);
-    setActiveFileName(filename); 
+    setActiveFileName(filename);
 
     try {
       const response = await fetch(`/${filename}`);
       if (!response.ok) throw new Error(`Failed to load ${filename}`);
       const xmlText = await response.text();
-      // console.log(xmlText);
 
       const data = parseRoofXML(xmlText);
       if (!data.faces.length) throw new Error("No roof faces found in XML");
-      // console.log(data)
       setRoofData(data);
     } catch (e: any) {
       console.error("Error loading built-in file:", e);
@@ -55,22 +85,23 @@ export default function App() {
     if (!newFiles || newFiles.length === 0) return;
     setUploadedFiles((prev) => {
       const combined = [...prev, ...newFiles];
-      return combined.filter((file, index, self) => 
-        index === self.findIndex((f) => f.name === file.name)
+      return combined.filter(
+        (file, index, self) =>
+          index === self.findIndex((f) => f.name === file.name)
       );
     });
 
     const fileToLoad = newFiles[0];
     handleSelectFile(fileToLoad.name, fileToLoad.xml);
-    
+
     setIsCustomUpload(true);
-    setShowFileSidebar(true); 
+    setShowFileSidebar(true);
   };
 
   const handleSelectFile = (fileName: string, xmlContent?: string) => {
     let xml = xmlContent;
     if (!xml) {
-      const found = uploadedFiles.find(f => f.name === fileName);
+      const found = uploadedFiles.find((f) => f.name === fileName);
       if (found) xml = found.xml;
     }
 
@@ -97,7 +128,7 @@ export default function App() {
         return [...prev, id];
       }
     });
-    setShowMeasurements(true)
+    setShowMeasurements(true);
   };
 
   useEffect(() => {
@@ -119,10 +150,8 @@ export default function App() {
         <h3 className="text-xl font-bold">Error</h3>
         <p className="mb-6">{error || "No data available"}</p>
         <button
-          onClick={() => loadBuiltinFile(selectedBuiltin)}
           className="px-6 py-3 bg-green-500 rounded-lg text-white font-bold hover:bg-green-600"
         >
-          Try Again
         </button>
       </div>
     );
@@ -142,19 +171,25 @@ export default function App() {
 
       <div className="flex flex-1 overflow-hidden relative">
         <div className="flex-1 relative flex flex-col bg-gray-50 border-r border-gray-200">
-          
           <div className="absolute left-4 top-4 z-10 flex gap-2">
             <button
               className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
-                view === "3d" ? "bg-blue-600 text-white border-blue-600" : "bg-white text-gray-700 hover:bg-gray-100"
+                view === "3d"
+                  ? "bg-blue-600 text-white border-blue-600"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
               }`}
-              onClick={() => setView("3d")}
+              onClick={() => {
+                setView("3d");
+                setShowMeasurements(!showMeasurements);
+              }}
             >
               🏠 3D View
             </button>
             <button
               className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
-                view === "2d" ? "bg-blue-600 text-white border-blue-600" : "bg-white text-gray-700 hover:bg-gray-100"
+                view === "2d"
+                  ? "bg-blue-600 text-white border-blue-600"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
               }`}
               onClick={() => setView("2d")}
             >
@@ -162,7 +197,9 @@ export default function App() {
             </button>
             <button
               className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
-                showMeasurements ? "bg-blue-600 text-white" : "bg-white text-gray-700 hover:bg-gray-100"
+                showMeasurements
+                  ? "bg-blue-600 text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
               }`}
               onClick={() => setShowMeasurements(!showMeasurements)}
             >
@@ -170,11 +207,19 @@ export default function App() {
             </button>
             <button
               className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
-                showFileSidebar ? "bg-blue-600 text-white" : "bg-white text-gray-700 hover:bg-gray-100"
+                showFileSidebar
+                  ? "bg-blue-600 text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
               }`}
               onClick={() => setShowFileSidebar(!showFileSidebar)}
             >
-               Files ({uploadedFiles.length})
+              Files ({uploadedFiles.length})
+            </button>
+            <button
+              onClick={handleSecondHold}
+              className={`px-4 py-2 rounded-full border shadow-sm transition-colors`}
+            >
+              Click here {second}
             </button>
           </div>
 
@@ -182,12 +227,19 @@ export default function App() {
             <div className="absolute right-0 top-16 z-20 w-64 bg-white shadow-2xl border-l border-gray-200 rounded-l-lg overflow-hidden flex flex-col max-h-[80%]">
               <div className="p-4 bg-gray-100 border-b border-gray-200 flex justify-between items-center">
                 <h3 className="font-bold text-gray-700">Uploaded Files</h3>
-                <button onClick={() => setShowFileSidebar(false)} className="text-gray-400 hover:text-red-500">✕</button>
+                <button
+                  onClick={() => setShowFileSidebar(false)}
+                  className="text-gray-400 hover:text-red-500"
+                >
+                  ✕
+                </button>
               </div>
-              
+
               <div className="overflow-y-auto p-2">
                 {uploadedFiles.length === 0 ? (
-                  <p className="text-gray-400 text-center py-4 text-sm">No files uploaded yet.</p>
+                  <p className="text-gray-400 text-center py-4 text-sm">
+                    No files uploaded yet.
+                  </p>
                 ) : (
                   <ul className="space-y-1">
                     {uploadedFiles.map((file, idx) => (
@@ -219,12 +271,11 @@ export default function App() {
                 toggleSelection={toggleSelection}
               />
             ) : (
-              <Roof3DView 
-                faces={roofData.faces} 
-                lines={roofData.lines} 
+              <Roof3DView
+                faces={roofData.faces}
+                lines={roofData.lines}
                 selectedFaceIds={selectedFaceIds}
-                toggleSelection={ toggleSelection }
-                // showMeasurements={true}
+                toggleSelection={toggleSelection}
               />
             )}
           </div>
