@@ -6,6 +6,7 @@ import { MeasurementsPanel } from "./components/MeasurementsPanel";
 import { ReportHeader } from "./components/ReportHeader";
 // import moment from "moment";
 import Timer from "./components/Timer";
+import ReverseTimer from "./components/ReverseTimer";
 import "./App.css";
 
 interface UploadedFile {
@@ -282,6 +283,7 @@ export default function App() {
               )}
             </div> */}
             <Timer  />
+            <ReverseTimer />
           </div>
 
           {showFileSidebar && (

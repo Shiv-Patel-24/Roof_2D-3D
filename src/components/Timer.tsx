@@ -3,13 +3,13 @@ import moment from "moment";
 
 const Timer = () => {
   const [timeDisplay, setTimeDisplay] = useState<string>("");
-  console.log('1')
-  const [isStopwatchActive, setIsStopwatchActive] = useState<boolean>(true);
+//   console.log('1')
+  const [isStopwatchActive, setIsStopwatchActive] = useState<boolean>(false);
   const [stopwatchStartTime, setStopwatchStartTime] = useState<number>(
     Date.now()
   );
   const [elapsedTimeOnStop, setElapsedTimeOnStop] = useState<number>(0);
-  console.log('one')
+//   console.log('one')
   const [message, setMessage] = useState<string>("");
   const [tickCount, setTickCount] = useState<number>(0);
   useEffect(() => {
@@ -21,7 +21,6 @@ const Timer = () => {
         const newElapsedTime =
           elapsedTimeOnStop + (currentTime - stopwatchStartTime);
         const duration = moment.duration(newElapsedTime);
-        // using useRef or useState(useState for recode of each 15 seconds )
         const format =
           duration.hours() > 0 ? "MMMM Do YYYY, HH:mm:ss" : "HH:mm:ss:sS";
         setTimeDisplay(moment.utc(duration.asMilliseconds()).format(format));
