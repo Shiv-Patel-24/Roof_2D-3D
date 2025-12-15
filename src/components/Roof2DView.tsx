@@ -313,7 +313,7 @@ export const Roof2DView = ({
           <div  className="flex gap-8">
             <button
               onClick={selectAll}
-              className=" bg-blue-300 text-black border-none rounded-xl cursor-pointer h-[2rem] w-[5rem] mb-2 "
+              className=" bg-blue-300 text-black border-none rounded-xl cursor-pointer h-[3rem] w-[6rem] mb-2 "
             >
               {selectedIds.length === faces.length
                 ? "Unselect All"

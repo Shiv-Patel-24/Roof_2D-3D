@@ -4,6 +4,8 @@ import { Roof2DView } from "./components/Roof2DView";
 import { Roof3DView } from "./components/Roof3DView";
 import { MeasurementsPanel } from "./components/MeasurementsPanel";
 import { ReportHeader } from "./components/ReportHeader";
+// import moment from "moment";
+import Timer from "./components/Timer";
 import "./App.css";
 
 interface UploadedFile {
@@ -28,36 +30,79 @@ export default function App() {
     "eagleview-data-2.xml"
   );
   const [isCustomUpload, setIsCustomUpload] = useState(false);
-  // const [count, setCount] = useState<number>(0);
-  const [second, setSecond] = useState<number> (0);
-  const [running, setRunning] = useState(false);
-  // useEffect( () => {
-  //   setTimeout(() => {
-  //     setCount(count + 1);
-  //   }, 5000)
-  // }, [count])
 
-useEffect(() => {
-  if (!running) return;
+  // const [timeDisplay, setTimeDisplay] = useState<string>("");
+  // const [isStopwatchActive, setIsStopwatchActive] = useState<boolean>(false);
+  // const [stopwatchStartTime, setStopwatchStartTime] = useState<number>(
+  //   Date.now()
+  // );
+  // const [elapsedTimeOnStop, setElapsedTimeOnStop] = useState<number>(0);
+  // // const [running, setRunning] = useState<number>();
+  // // const [ticks, setTicks] = useState<number>(0);
+  // const [message, setMessage] = useState<string>("");
+  // const [tickCount, setTickCount] = useState<number>(0);
+  // useEffect(() => {
+  //     let intervalId: NodeJS.Timeout | null = null;
 
-  const interval = setInterval(() => {
-    setSecond(prev => {
-      if (prev >= 9) {      
-        setRunning(false); 
-        return 10;
-      }
-      return prev + 1;
-    });
-  }, 1000);
+  //     const updateTimer = () => {
+  //       if (isStopwatchActive) {
+  //         const currentTime = Date.now();
+  //         const newElapsedTime =
+  //           elapsedTimeOnStop + (currentTime - stopwatchStartTime);
+  //         const duration = moment.duration(newElapsedTime);
+  //         // using useRef or useState(useState for recode of each 15 seconds )
+  //         const format =
+  //           duration.hours() > 0 ? "MMMM Do YYYY, HH:mm:ss" : "HH:mm:ss:sS";
+  //         setTimeDisplay(moment.utc(duration.asMilliseconds()).format(format));
+  //       } else {
+  //         setTimeDisplay(moment().format("MMMM Do YYYY, HH:mm:ss"));
+  //       }
+  //     };
 
-  return () => clearInterval(interval);
-}, [running]);
+  //     const intervalDuration = isStopwatchActive ? 10 : 1000;
+  //     intervalId = setInterval(updateTimer, intervalDuration);
 
+  //     return () => {
+  //       if (intervalId) {
+  //         clearInterval(intervalId);
+  //       }
+  //     };
+  //   }, [isStopwatchActive, stopwatchStartTime, elapsedTimeOnStop]);
 
-  const handleSecondHold = () => {
-    setSecond(0);
-    setRunning(true)
-  }
+  //   const toggleTimerMode = () => {
+  //     setIsStopwatchActive((prev) => {
+  //     const newState = prev;
+
+  //     if (!newState) {
+  //       setStopwatchStartTime(Date.now());
+  //     } else {
+  //       const currentTime = Date.now();
+  //       const newElapsedTime =
+  //         elapsedTimeOnStop + (currentTime - stopwatchStartTime);
+  //       setElapsedTimeOnStop(newElapsedTime);
+  //     }
+  //     return !prev;
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   if (!isStopwatchActive) {
+  //     setMessage("");
+  //     setTickCount(0);
+  //     return;
+  //   }
+
+  //   const interval = setInterval(() => {
+  //     console.log(tickCount);
+  //     setTickCount((prev) => {
+  //       const next = prev + 1;
+  //       setMessage(` ${next * 5} seconds completed`);
+  //       return next;
+  //     });
+  //   }, 5000);
+
+  //   return () => clearInterval(interval);
+  // }, [isStopwatchActive]);
 
   const loadBuiltinFile = async (filename: string) => {
     setLoading(true);
@@ -149,10 +194,7 @@ useEffect(() => {
       <div className="flex flex-col items-center justify-center h-screen bg-gray-800 text-white">
         <h3 className="text-xl font-bold">Error</h3>
         <p className="mb-6">{error || "No data available"}</p>
-        <button
-          className="px-6 py-3 bg-green-500 rounded-lg text-white font-bold hover:bg-green-600"
-        >
-        </button>
+        <button className="px-6 py-3 bg-green-500 rounded-lg text-white font-bold hover:bg-green-600"></button>
       </div>
     );
   }
@@ -215,12 +257,31 @@ useEffect(() => {
             >
               Files ({uploadedFiles.length})
             </button>
-            <button
-              onClick={handleSecondHold}
+            {/* <button
+              onClick={toggleTimerMode}
               className={`px-4 py-2 rounded-full border shadow-sm transition-colors`}
             >
-              Click here {second}
-            </button>
+              Today :{" "}
+              <b>
+                {" "}
+                {timeDisplay} {}
+              </b>
+            </button> */}
+            {/* <div className="flex items-center gap-3">
+              <button
+                onClick={toggleTimerMode}
+                className="px-4 py-2 rounded-full border shadow-sm transition-colors"
+              >
+                Today : <b>{timeDisplay}</b>
+              </button>
+
+              {message && (
+                <span className="text-sm text-green-600 font-medium">
+                  {message}
+                </span>
+              )}
+            </div> */}
+            <Timer  />
           </div>
 
           {showFileSidebar && (
