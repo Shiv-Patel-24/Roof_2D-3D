@@ -6,7 +6,8 @@ import { MeasurementsPanel } from "./components/MeasurementsPanel";
 import { ReportHeader } from "./components/ReportHeader";
 // import moment from "moment";
 import Timer from "./components/Timer";
-import ReverseTimer from "./components/ReverseTimer";
+import TimerInput from "./components/TimerInput";
+import Display from "./components/Display";
 import "./App.css";
 
 interface UploadedFile {
@@ -16,7 +17,7 @@ interface UploadedFile {
 
 export default function App() {
   const [roofData, setRoofData] = useState<RoofData | null>(null);
-  const [view, setView] = useState<"2d" | "3d">("2d");
+  const [view, setView] = useState<"2d" | "3d">("3d");
   const [showMeasurements, setShowMeasurements] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -32,78 +33,12 @@ export default function App() {
   );
   const [isCustomUpload, setIsCustomUpload] = useState(false);
 
-  // const [timeDisplay, setTimeDisplay] = useState<string>("");
-  // const [isStopwatchActive, setIsStopwatchActive] = useState<boolean>(false);
-  // const [stopwatchStartTime, setStopwatchStartTime] = useState<number>(
-  //   Date.now()
-  // );
-  // const [elapsedTimeOnStop, setElapsedTimeOnStop] = useState<number>(0);
-  // // const [running, setRunning] = useState<number>();
-  // // const [ticks, setTicks] = useState<number>(0);
-  // const [message, setMessage] = useState<string>("");
-  // const [tickCount, setTickCount] = useState<number>(0);
-  // useEffect(() => {
-  //     let intervalId: NodeJS.Timeout | null = null;
+  // store timer, other will be manage display
+  const [timeInSeconds, setTimeInSecond ] = useState<number>(0);
 
-  //     const updateTimer = () => {
-  //       if (isStopwatchActive) {
-  //         const currentTime = Date.now();
-  //         const newElapsedTime =
-  //           elapsedTimeOnStop + (currentTime - stopwatchStartTime);
-  //         const duration = moment.duration(newElapsedTime);
-  //         // using useRef or useState(useState for recode of each 15 seconds )
-  //         const format =
-  //           duration.hours() > 0 ? "MMMM Do YYYY, HH:mm:ss" : "HH:mm:ss:sS";
-  //         setTimeDisplay(moment.utc(duration.asMilliseconds()).format(format));
-  //       } else {
-  //         setTimeDisplay(moment().format("MMMM Do YYYY, HH:mm:ss"));
-  //       }
-  //     };
-
-  //     const intervalDuration = isStopwatchActive ? 10 : 1000;
-  //     intervalId = setInterval(updateTimer, intervalDuration);
-
-  //     return () => {
-  //       if (intervalId) {
-  //         clearInterval(intervalId);
-  //       }
-  //     };
-  //   }, [isStopwatchActive, stopwatchStartTime, elapsedTimeOnStop]);
-
-  //   const toggleTimerMode = () => {
-  //     setIsStopwatchActive((prev) => {
-  //     const newState = prev;
-
-  //     if (!newState) {
-  //       setStopwatchStartTime(Date.now());
-  //     } else {
-  //       const currentTime = Date.now();
-  //       const newElapsedTime =
-  //         elapsedTimeOnStop + (currentTime - stopwatchStartTime);
-  //       setElapsedTimeOnStop(newElapsedTime);
-  //     }
-  //     return !prev;
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   if (!isStopwatchActive) {
-  //     setMessage("");
-  //     setTickCount(0);
-  //     return;
-  //   }
-
-  //   const interval = setInterval(() => {
-  //     console.log(tickCount);
-  //     setTickCount((prev) => {
-  //       const next = prev + 1;
-  //       setMessage(` ${next * 5} seconds completed`);
-  //       return next;
-  //     });
-  //   }, 5000);
-
-  //   return () => clearInterval(interval);
-  // }, [isStopwatchActive]);
+  const handleStartTimer = (timeInSeconds: never) => {
+    setTimeInSecond(timeInSeconds)  //starting time 
+  }
 
   const loadBuiltinFile = async (filename: string) => {
     setLoading(true);
@@ -216,7 +151,7 @@ export default function App() {
         <div className="flex-1 relative flex flex-col bg-gray-50 border-r border-gray-200">
           <div className="absolute left-4 top-4 z-10 flex gap-2">
             <button
-              className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
+              className={`px-4 py-2 rounded-full  h-[4rem] border shadow-sm transition-colors ${
                 view === "3d"
                   ? "bg-blue-600 text-white border-blue-600"
                   : "bg-white text-gray-700 hover:bg-gray-100"
@@ -229,7 +164,7 @@ export default function App() {
               🏠 3D View
             </button>
             <button
-              className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
+              className={`px-4 py-2 rounded-full  h-[4rem] border shadow-sm transition-colors ${
                 view === "2d"
                   ? "bg-blue-600 text-white border-blue-600"
                   : "bg-white text-gray-700 hover:bg-gray-100"
@@ -239,7 +174,7 @@ export default function App() {
               📐 2D Blueprint
             </button>
             <button
-              className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
+              className={`px-4 py-2 rounded-full  h-[4rem] border shadow-sm transition-colors ${
                 showMeasurements
                   ? "bg-blue-600 text-white"
                   : "bg-white text-gray-700 hover:bg-gray-100"
@@ -249,7 +184,7 @@ export default function App() {
               📊 {showMeasurements ? "Hide" : "Show"} Data
             </button>
             <button
-              className={`px-4 py-2 rounded-full border shadow-sm transition-colors ${
+              className={`px-4 py-2 rounded-full h-[4rem] border shadow-sm transition-colors ${
                 showFileSidebar
                   ? "bg-blue-600 text-white"
                   : "bg-white text-gray-700 hover:bg-gray-100"
@@ -258,32 +193,11 @@ export default function App() {
             >
               Files ({uploadedFiles.length})
             </button>
-            {/* <button
-              onClick={toggleTimerMode}
-              className={`px-4 py-2 rounded-full border shadow-sm transition-colors`}
-            >
-              Today :{" "}
-              <b>
-                {" "}
-                {timeDisplay} {}
-              </b>
-            </button> */}
-            {/* <div className="flex items-center gap-3">
-              <button
-                onClick={toggleTimerMode}
-                className="px-4 py-2 rounded-full border shadow-sm transition-colors"
-              >
-                Today : <b>{timeDisplay}</b>
-              </button>
-
-              {message && (
-                <span className="text-sm text-green-600 font-medium">
-                  {message}
-                </span>
-              )}
-            </div> */}
-            <Timer  />
-            <ReverseTimer />
+            <Timer />
+            <div className="flex flex-col items-start gap-4 p-2 border rounded-lg">
+              <TimerInput onStart={handleStartTimer} />
+              <Display timeInSeconds={timeInSeconds} />
+            </div>
           </div>
 
           {showFileSidebar && (
