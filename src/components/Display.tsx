@@ -13,7 +13,6 @@ const Display = ({ timeInSeconds }) => {
   };
 
   useEffect(() => {
-    //props change
     setSeconds(timeInSeconds);
   }, [timeInSeconds]);
 
@@ -40,13 +39,11 @@ const Display = ({ timeInSeconds }) => {
 
   return (
     <div>
-
       <h2>Time Remaining: {formatTime(seconds)}</h2>
       {/* {!isRunning && seconds === 0 && <p>Time finished</p>} */}
       <button onClick={handleStart}>start</button>
       {/* {!isRunning && seconds > 0 || (
       )}  */}
-    
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { Roof2DView } from "./components/Roof2DView";
 import { Roof3DView } from "./components/Roof3DView";
 import { MeasurementsPanel } from "./components/MeasurementsPanel";
 import { ReportHeader } from "./components/ReportHeader";
-// import moment from "moment";
 import Timer from "./components/Timer";
 import TimerInput from "./components/TimerInput";
 import Display from "./components/Display";
@@ -17,28 +16,23 @@ interface UploadedFile {
 
 export default function App() {
   const [roofData, setRoofData] = useState<RoofData | null>(null);
-  const [view, setView] = useState<"2d" | "3d">("3d");
+  const [view, setView] = useState<"2d" | "3d">("2d");
   const [showMeasurements, setShowMeasurements] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   const [selectedFaceIds, setSelectedFaceIds] = useState<string[]>([]);
-
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [activeFileName, setActiveFileName] = useState<string | null>(null);
   const [showFileSidebar, setShowFileSidebar] = useState(false);
-
   const [selectedBuiltin, setSelectedBuiltin] = useState(
-    "eagleview-data-2.xml"
+    "eagleview-data-1.xml"
   );
   const [isCustomUpload, setIsCustomUpload] = useState(false);
-
-  // store timer, other will be manage display
-  const [timeInSeconds, setTimeInSecond ] = useState<number>(0);
+  const [timeInSeconds, setTimeInSecond] = useState<number>(0);
 
   const handleStartTimer = (timeInSeconds: never) => {
-    setTimeInSecond(timeInSeconds)  //starting time 
-  }
+    setTimeInSecond(timeInSeconds);
+  };
 
   const loadBuiltinFile = async (filename: string) => {
     setLoading(true);
@@ -50,10 +44,12 @@ export default function App() {
       const response = await fetch(`/${filename}`);
       if (!response.ok) throw new Error(`Failed to load ${filename}`);
       const xmlText = await response.text();
+      console.log(xmlText, "app.tsx xmlText");
 
       const data = parseRoofXML(xmlText);
       if (!data.faces.length) throw new Error("No roof faces found in XML");
       setRoofData(data);
+      console.log(data, "data form app.tsx");
     } catch (e: any) {
       console.error("Error loading built-in file:", e);
       setError(e.message);
@@ -63,9 +59,12 @@ export default function App() {
   };
 
   const handleUpload = (newFiles: UploadedFile[]) => {
+    console.log("uploading files ");
     if (!newFiles || newFiles.length === 0) return;
+    console.log(newFiles, "new file uploaded from handleUpload");
     setUploadedFiles((prev) => {
       const combined = [...prev, ...newFiles];
+      console.log(combined);
       return combined.filter(
         (file, index, self) =>
           index === self.findIndex((f) => f.name === file.name)
@@ -81,6 +80,7 @@ export default function App() {
 
   const handleSelectFile = (fileName: string, xmlContent?: string) => {
     let xml = xmlContent;
+    console.log(xml, "xml");
     if (!xml) {
       const found = uploadedFiles.find((f) => f.name === fileName);
       if (found) xml = found.xml;

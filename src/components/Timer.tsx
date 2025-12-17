@@ -3,21 +3,23 @@ import moment from "moment";
 
 const Timer = () => {
   const [timeDisplay, setTimeDisplay] = useState<string>("");
-//   console.log('1')
   const [isStopwatchActive, setIsStopwatchActive] = useState<boolean>(false);
-  const [stopwatchStartTime, setStopwatchStartTime] = useState<number>(
-    Date.now()
+  // const [stopwatchStartTime, setStopwatchStartTime] = useState<number>(
+  //   Date.now()
+  // );
+  const [stopwatchStartTime, setStopwatchStartTime] = useState<number | string>(
+    moment().valueOf()
   );
   const [elapsedTimeOnStop, setElapsedTimeOnStop] = useState<number>(0);
-//   console.log('one')
   const [message, setMessage] = useState<string>("");
   const [tickCount, setTickCount] = useState<number>(0);
   useEffect(() => {
     let intervalId: NodeJS.Timeout | null = null;
-
+    
     const updateTimer = () => {
       if (isStopwatchActive) {
-        const currentTime = Date.now();
+        // const currentTime = Date.now();
+        const currentTime = moment().valueOf();
         const newElapsedTime =
           elapsedTimeOnStop + (currentTime - stopwatchStartTime);
         const duration = moment.duration(newElapsedTime);
@@ -44,9 +46,9 @@ const Timer = () => {
       const newState = prev;
 
       if (!newState) {
-        setStopwatchStartTime(Date.now());
+        setStopwatchStartTime(moment().valueOf());
       } else {
-        const currentTime = Date.now();
+        const currentTime = moment().valueOf();
         const newElapsedTime =
           elapsedTimeOnStop + (currentTime - stopwatchStartTime);
         setElapsedTimeOnStop(newElapsedTime);
