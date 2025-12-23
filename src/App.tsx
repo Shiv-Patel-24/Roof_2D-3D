@@ -30,7 +30,7 @@ export default function App() {
   const [isCustomUpload, setIsCustomUpload] = useState(false);
   const [timeInSeconds, setTimeInSecond] = useState<number>(0);
 
-  const handleStartTimer = (timeInSeconds: never) => {
+  const handleStartTimer : (timeInSeconds: number) => void = (timeInSeconds: number) => {
     setTimeInSecond(timeInSeconds);
   };
 
@@ -44,27 +44,23 @@ export default function App() {
       const response = await fetch(`/${filename}`);
       if (!response.ok) throw new Error(`Failed to load ${filename}`);
       const xmlText = await response.text();
-      console.log(xmlText, "app.tsx xmlText");
 
       const data = parseRoofXML(xmlText);
       if (!data.faces.length) throw new Error("No roof faces found in XML");
       setRoofData(data);
-      console.log(data, "data form app.tsx");
-    } catch (e: any) {
-      console.error("Error loading built-in file:", e);
-      setError(e.message);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+      }
     } finally {
       setLoading(false);
     }
   };
 
   const handleUpload = (newFiles: UploadedFile[]) => {
-    console.log("uploading files ");
     if (!newFiles || newFiles.length === 0) return;
-    console.log(newFiles, "new file uploaded from handleUpload");
     setUploadedFiles((prev) => {
       const combined = [...prev, ...newFiles];
-      console.log(combined);
       return combined.filter(
         (file, index, self) =>
           index === self.findIndex((f) => f.name === file.name)
@@ -80,7 +76,6 @@ export default function App() {
 
   const handleSelectFile = (fileName: string, xmlContent?: string) => {
     let xml = xmlContent;
-    console.log(xml, "xml");
     if (!xml) {
       const found = uploadedFiles.find((f) => f.name === fileName);
       if (found) xml = found.xml;
@@ -94,10 +89,13 @@ export default function App() {
 
     try {
       const data = parseRoofXML(xml);
-      console.log(data);
       setRoofData(data);
-    } catch (e: any) {
-      setError(`Error parsing ${fileName}: ${e.message}`);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(`Error parsing ${e.message}`);
+      } else {
+        setError(`Error parsing ${fileName}`);
+      }
     }
   };
 
@@ -193,8 +191,10 @@ export default function App() {
             >
               Files ({uploadedFiles.length})
             </button>
-            <Timer />
-            <div className="flex flex-col items-start gap-4 p-2 border rounded-lg">
+            <div className="h-[3rem]">
+              <Timer />
+            </div>
+            <div className="flex flex-row items-start gap-2 p-2 border rounded-lg">
               <TimerInput onStart={handleStartTimer} />
               <Display timeInSeconds={timeInSeconds} />
             </div>
@@ -221,7 +221,7 @@ export default function App() {
                   <ul className="space-y-1">
                     {uploadedFiles.map((file, idx) => (
                       <li
-                        key={`${file.name}-${idx}`}
+                        key={`${idx}`}
                         onClick={() => handleSelectFile(file.name)}
                         className={`p-3 rounded-md text-sm cursor-pointer transition-colors flex items-center gap-2 ${
                           activeFileName === file.name

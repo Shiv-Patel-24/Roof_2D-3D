@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 
-const Display = ({ timeInSeconds }) => {
+const Display = ({ timeInSeconds }: { timeInSeconds: number }) => {
   const [seconds, setSeconds] = useState(timeInSeconds);
-  const [isRunning, setIsRunning] = useState(false);
+  const [isRunning] = useState(true);
 
-  const formatTime = (t) => {
-    const mins = Math.floor(t / 60);
-    const secs = t % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs
+  const formatTime = (t: number) => {
+    return `${Math.floor(t / 60)
       .toString()
-      .padStart(2, "0")}`;
+      .padStart(2, "0")}:${(t % 60).toString().padStart(2, "0")}`;
   };
 
   useEffect(() => {
@@ -32,22 +30,16 @@ const Display = ({ timeInSeconds }) => {
     };
   }, [isRunning, seconds]);
 
-  const handleStart = (timeInSeconds: number) => {
-    // setSeconds(timeInSeconds);
-    setIsRunning(true);
-  };
+  // const handleStart = () => {
+  //   setIsRunning(true);
+  // };
 
   return (
     <div>
       <h2>Time Remaining: {formatTime(seconds)}</h2>
-      {/* {!isRunning && seconds === 0 && <p>Time finished</p>} */}
-      <button onClick={handleStart}>start</button>
-      {/* {!isRunning && seconds > 0 || (
-      )}  */}
+      {/* <button onClick={handleStart} className="bg-black text-white hover:bg-blue-900 w-12 rounded-xl">Start</button> */}
     </div>
   );
 };
 
 export default Display;
-
-// const Display = ({ seconds, isRunning, onStop }) => {

@@ -72,7 +72,7 @@ export const ReportHeader = ({
             type="file"
             accept=".xml,text/xml,application/xml"
             className="hidden"
-            multiple
+            // multiple
             onChange={handleFileUpload}
           />
         </label>

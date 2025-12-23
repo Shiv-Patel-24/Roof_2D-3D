@@ -1,13 +1,11 @@
+/// <reference types="node" />
 import { useEffect, useState } from "react";
 import moment from "moment";
 
 const Timer = () => {
   const [timeDisplay, setTimeDisplay] = useState<string>("");
   const [isStopwatchActive, setIsStopwatchActive] = useState<boolean>(false);
-  // const [stopwatchStartTime, setStopwatchStartTime] = useState<number>(
-  //   Date.now()
-  // );
-  const [stopwatchStartTime, setStopwatchStartTime] = useState<number | string>(
+  const [stopwatchStartTime, setStopwatchStartTime] = useState<number>(
     moment().valueOf()
   );
   const [elapsedTimeOnStop, setElapsedTimeOnStop] = useState<number>(0);
@@ -15,24 +13,26 @@ const Timer = () => {
   const [tickCount, setTickCount] = useState<number>(0);
   useEffect(() => {
     let intervalId: NodeJS.Timeout | null = null;
-    
     const updateTimer = () => {
       if (isStopwatchActive) {
-        // const currentTime = Date.now();
         const currentTime = moment().valueOf();
         const newElapsedTime =
           elapsedTimeOnStop + (currentTime - stopwatchStartTime);
-        const duration = moment.duration(newElapsedTime);
         const format =
-          duration.hours() > 0 ? "MMMM Do YYYY, HH:mm:ss" : "HH:mm:ss:sS";
-        setTimeDisplay(moment.utc(duration.asMilliseconds()).format(format));
+          moment.duration(newElapsedTime).hours() > 0
+            ? "MMMM Do YYYY, HH:mm:ss"
+            : "HH:mm:ss:sS";
+        setTimeDisplay(
+          moment
+            .utc(moment.duration(newElapsedTime).asMilliseconds())
+            .format(format)
+        );
       } else {
         setTimeDisplay(moment().format("MMMM Do YYYY, HH:mm:ss"));
       }
     };
 
-    const intervalDuration = isStopwatchActive ? 10 : 1000;
-    intervalId = setInterval(updateTimer, intervalDuration);
+    intervalId = setInterval(updateTimer, isStopwatchActive ? 10 : 1000);
 
     return () => {
       if (intervalId) {
@@ -59,13 +59,15 @@ const Timer = () => {
 
   useEffect(() => {
     if (!isStopwatchActive) {
-      setMessage("");
-      setTickCount(0);
-      return;
+      // setTickCount(0);
+      // setMessage("");
+      return () => {
+        setMessage("");
+        setTickCount(0);
+      };
     }
 
     const interval = setInterval(() => {
-      console.log(tickCount);
       setTickCount((prev) => {
         const next = prev + 1;
         setMessage(` ${next * 5} seconds completed`);
@@ -78,13 +80,14 @@ const Timer = () => {
 
   return (
     <div>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3x  ">
         <button
           onClick={toggleTimerMode}
           className="px-4 py-2 rounded-full border shadow-sm transition-colors"
         >
           Today : <b>{timeDisplay}</b>
         </button>
+        <p className="invisible">{tickCount}</p>
 
         {message && (
           <span className="text-sm text-green-600 font-medium">{message}</span>
@@ -95,6 +98,3 @@ const Timer = () => {
 };
 
 export default Timer;
-
-
-// take new state. 

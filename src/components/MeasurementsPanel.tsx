@@ -7,7 +7,6 @@ interface MeasurementsPanelProps {
   activeFileName: string | null;
   selectedFaceIds: string[];
   toggleSelection: (id: string) => void;
-  // setActiveTab: (tab: "faces" | "lines" | "summary") => void;
 }
 
 export const MeasurementsPanel = ({
@@ -17,8 +16,9 @@ export const MeasurementsPanel = ({
   toggleSelection,
   selectedFaceIds,
 }: MeasurementsPanelProps) => {
-  const [activeTab, setActiveTab] = useState<"faces" | "lines" | "summary">("faces");
-
+  const [activeTab, setActiveTab] = useState<"faces" | "lines" | "summary">(
+    "faces"
+  );
   const totalArea = faces.reduce((sum, face) => sum + face.size, 0);
   const avgPitch =
     faces.reduce((sum, face) => sum + face.pitch, 0) / (faces.length || 1);
@@ -32,16 +32,11 @@ export const MeasurementsPanel = ({
     return 0;
   });
 
-  // using state lifting. I have to setActiveTab to faces. Whenever i click on any faces, then it will directly everytime faces. setActive is availble in MeasuremntsPanel. For app.tsx only getting toggleselection, faces, lines, activeFileName, selectedFaceIds
   useEffect(() => {
-    //  return () => {
+    return () => {
       setActiveTab("faces");
-
-      // return ()=>{
-        
-      // }
-    //  }
-  }, [selectedFaceIds])
+    };
+  }, [selectedFaceIds]);
 
   return (
     <div className="w-[350px] flex flex-col bg-white border-l border-gray-200 shadow-lg z-20">
@@ -70,7 +65,7 @@ export const MeasurementsPanel = ({
                   ? "text-blue-600 border-b-2 border-blue-600 bg-white"
                   : "text-gray-500 hover:bg-gray-50 hover:text-gray-700"
               }`}
-            onClick={() => setActiveTab(tab as any)}
+            onClick={() => setActiveTab(tab as "faces" | "lines" | "summary")}
           >
             {tab}
           </button>
@@ -91,7 +86,10 @@ export const MeasurementsPanel = ({
               {sortedFaces.map((face) => (
                 <tr
                   key={face.id}
-                  onClick={() => {toggleSelection(face.id); setActiveTab("faces")}}
+                  onClick={() => {
+                    toggleSelection(face.id);
+                    setActiveTab("faces");
+                  }}
                   className={`hover:bg-blue-50 transition-colors ${
                     selectedFaceIds.includes(face.id) ? "bg-blue-100" : ""
                   }`}
@@ -120,11 +118,7 @@ export const MeasurementsPanel = ({
             </thead>
             <tbody className="divide-y divide-gray-100">
               {lines.map((line) => (
-                <tr
-                  key={line.id}
-                  className="hover:bg-gray-50"
-                  // onClick={() => toggleSelection(lines.id)}
-                >
+                <tr key={line.id} className="hover:bg-gray-50">
                   <td className="ml-2">{` ${line.id}  `} </td>
                   <td className="p-3">
                     <span
@@ -137,18 +131,18 @@ export const MeasurementsPanel = ({
                          : "bg-gray-100 text-gray-700"
                      }
                      ${
-                      line.type === "RAKE" 
-                      ? "bg-green-100 text-green-800"
-                      : line.type === "WALL"
-                      ? "bg-gray-100 text-gray-100"
-                      : "bg-gray-200 text-gray-200"
+                       line.type === "RAKE"
+                         ? "bg-green-100 text-green-800"
+                         : line.type === "WALL"
+                         ? "bg-gray-100 text-gray-100"
+                         : "bg-gray-200 text-gray-200"
                      }
                      ${
-                      line.type === "VALLEY"
-                      ? "bg-blue-100 text-blue-600"
-                      : line.type === "STEPFLASH"
-                      ? "bg-orange-100 text-orange-600"
-                      : "bg-gray-300 text-gray-900"
+                       line.type === "VALLEY"
+                         ? "bg-blue-100 text-blue-600"
+                         : line.type === "STEPFLASH"
+                         ? "bg-orange-100 text-orange-600"
+                         : "bg-gray-300 text-gray-900"
                      }
                    `}
                     >
@@ -156,7 +150,7 @@ export const MeasurementsPanel = ({
                     </span>
                   </td>
                   <td className="p-3 text-right text-gray-600">
-                    {line.path.length} pts 
+                    {line.path.length} pts
                   </td>
                 </tr>
               ))}
